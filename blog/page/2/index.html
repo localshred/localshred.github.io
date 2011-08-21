@@ -1,0 +1,835 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>rand9</title>
+  <meta name="author" content="BJ Neilsen">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://rand9.com/blog/page/2/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/rand9-blog" rel="alternate" title="rand9" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6580389-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">rand9</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/rand9-blog" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:rand9.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/ruby-dailies">Ruby Dailies</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-05-27 22:03:45 -0600" pubdate  updated >May 27<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Back in January (a whopping 5 months ago!) I started at a new position for an up and coming startup company in Utah. I left my previous employer who had treated me extremely well, given me great opportunities to learn and grow, and ultimately put me in a great position to yet again catapult into even bigger and better things.</p>
+
+<p>One of the biggest draws for coming to the new company was the opportunity I was given to choose the language and platform for an entirely new product, one I&#8217;d be driving the development of while running my own team. The majority of the team was leaning towards Python, but during the interview process I made it quite clear that it was my goal to do the thing in Ruby. Previous to this opportunity, I&#8217;d done a lot of ruby on the side for clients and my own projects, but it hadn&#8217;t quite cracked into the full-time gig. Here was my chance.</p>
+
+<p>It took a week or so to nail everyone down to the decision to move forward with Ruby and Sinatra, but it&#8217;s been an awesome decision for us.  I honestly am so happy each day solving problems in the unbelievably friendly language that is Ruby. I&#8217;ve learned an enormous amount, and feel like I&#8217;m at the point where I can start sharing a lot of the ruby tidbits I come across each day. I&#8217;m going to call this article series the <strong>Ruby Dailies</strong>, and the plan is to post a few articles a week showing off some neat things.</p>
+
+<p>Naturally, being a somewhat late newcomer to the ruby party, so much of what I have learned so far allows me to stand on the shoulders of (ruby) giants: Matz, _why, Ezra, Yehuda, DHH, Wanstrath, and tons of others. Obviously I&#8217;ll give credit where credit is due when posting these tidbits. Stay tuned!</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/ruby-dailies">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/bundler-0-9-1-with-capistrano">Bundler 0.9.1 With Capistrano</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-02-05 08:27:13 -0700" pubdate  updated >Feb 5<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On my current project at work we&#8217;re building a <a href="http://sinatrarb.com" title="Sinatra, the ruby micro-framework">Sinatra</a> app. More specifically, we used the <a href="http://monkrb.com" title="Monk the meta-glue framework built atop Sinatra">Monk</a> generator/glue meta-framework which is built atop Sinatra. When you generate a Monk app it automagically gives you a dependency/gem management system known as, fittingly, dependencies. This article isn&#8217;t meant to knock dependencies (which I believe is written by the <a href="http://citrusbyte.com" title="CitrusByte development shop">CitrusByte</a> guys, the creators of monk), but through some continuing issues with it we decided to find something else to handle that problem. That something we found was Yehuda&#8217;s <a href="http://github.com/carlhuda/bundler" title="Bundler gem management system">Bundler</a>.</p>
+
+<p>Bundler is really cool because it allows you to make all your gem management across all your development, testing, and production systems easy to handle. You define a <code>Gemfile</code> which references all the gems required to make your app go boom (in a good way). Once the file is defined simply run <code>bundle install</code> to ensure your system has all the necessary dependencies to run your app.</p>
+
+<p>I created my bundler Gemfile 4 or 5 days ago, installed the dependencies, and then sort of left it alone for a while. Yesterday I wanted to deploy my app to production and so I went into my capistrano <code>deploy.rb</code> to update my recipe to handle the bundler stuff. Naturally, I needed bundler on the server, so I went and installed the gem. Little did I realize that in those few days Yehuda and Carl had updated the gemspec to a new version for bundler, moving from 0.8.x to 0.9.1. When you install the 0.9.x version it asks you to remove any pre-0.9 installations of bundler. <strong>If you have an existing Bundler installation and want to upgrade, delete the old install <em>before</em> you install the new.</strong> Otherwise, your gem command will be broken. A lot of my headaches would have been alleviated had I just done that.</p>
+
+<p>I found a few blog posts and gists that have bundler specific tasks for cap recipes, so I forked and modified them for your benefit. In order to get the magic of bundler for your app, use the following in your cap recipe:</p>
+
+<div><script src='https://gist.github.com/295244.js?file='></script>
+<noscript><pre><code># ...
+
+namespace :bundler do
+  task :create_symlink, :roles =&gt; :app do
+    shared_dir = File.join(shared_path, 'bundle')
+    release_dir = File.join(current_release, '.bundle')
+    run(&quot;mkdir -p #{shared_dir} &amp;&amp; ln -s #{shared_dir} #{release_dir}&quot;)
+  end
+  
+  task :bundle_new_release, :roles =&gt; :app do
+    bundler.create_symlink
+    run &quot;cd #{release_path} &amp;&amp; bundle install --without test&quot;
+  end
+  
+  task :lock, :roles =&gt; :app do
+    run &quot;cd #{current_release} &amp;&amp; bundle lock;&quot;
+  end
+  
+  task :unlock, :roles =&gt; :app do
+    run &quot;cd #{current_release} &amp;&amp; bundle unlock;&quot;
+  end
+end
+
+# HOOKS
+after &quot;deploy:update_code&quot; do
+  bundler.bundle_new_release
+  # ...
+end
+</code></pre></noscript></div>
+
+
+<p>Two points to notice:</p>
+
+<ol>
+<li>We setup a hook to run after the deploy:update_code task which will run the bundle install command to get any bundle updates. Bundler 0.9.1 comes with a nifty feature where you can lock your gem versions so that any calls to bundle install won&#8217;t actually update anything.</li>
+<li>We&#8217;re also symlinking the .bundle directory that bundler creates for us into the shared folder. This is just a nicety so that bundler doesn&#8217;t have to recreate that directory and it&#8217;s environment.rb file everytime you release your code.</li>
+</ol>
+
+
+<p>I hope this helps anyone out there who has upgraded their bundler versions. Happy bundling with capistrano. :)</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/bundler-0-9-1-with-capistrano">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/are-you-a-problem-solver-or-a-tool">Are You a Problem Solver or a Tool?</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-11-12 23:07:38 -0700" pubdate  updated >Nov 12<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&#8217;m at a point in my career as a Software Developer where I feel like things are opening up quite a bit for me. I&#8217;m not talking about getting a new job or something, I just mean that I think I&#8217;m finally understanding Software Development for what it is. I&#8217;ve been writing software since the beginning of 2003, so I guess I&#8217;m a little late coming to the game in this understanding? Oh well, it&#8217;s not the destination, it&#8217;s the journey, right? Right.</p>
+
+<h3>The Journey</h3>
+
+<p>My journey began as a craftsman. I got lucky because I learned how to program from a friend I worked with who was just helping me in his little spare time at work. My knowledge of PHP scripting started out super small, but I took rather well to it and essentially launched into a career when I had no idea I wanted one.</p>
+
+<p>Through the following months and years I gained an incredible amount of knowledge by simply working with really bright people. It just seemed that each new job I got I came in contact with someone who helped me in a different way than before:</p>
+
+<ol>
+<li>From Nathan, I learned the very basics of programming: control flow, variables, functions, mysql, etc.</li>
+<li>From Rainer I learned a ton about OO programming and CSS-based designs, as well as semantic markup that validates and conforms to standards. He also taught me to love the complex Join Query, and love it I do.</li>
+<li>Ben showed me a new way to use objects I hadn&#8217;t really seen before (closer to framework programming), and also got me a job at a great little startup where we were given a great opportunity to run the show. At that company, I gained absolutely invaluable experience managing, developing, and deploying large applications. We even got the chance to write our own web framework, which was a huge learning experience.</li>
+<li>Ryan showed me what it takes to really get things done. He&#8217;s also a fine purveyor of knives and guns (which, admittedly has nothing to do with this post at all, it&#8217;s just cool).</li>
+<li>From Eric and Kevin I gained the opportunity to take all my knowledge and apply it with a different toolset. I also learned a lot more about enterprise-level systems.</li>
+</ol>
+
+
+<p>All of these people and experiences has made me the developer I am today. I believe that whatever the road you take, eventually you come to be a developer who <strong>solves problems</strong>, which is really what software development is all about.</p>
+
+<h3>The Destination</h3>
+
+<p>So what is the relationship between solving problems and the programming languages or frameworks we use to do so? It&#8217;s quite simple:</p>
+
+<blockquote><p><strong><em>Languages are tools, and we use tools to solve problems.</em></strong></p></blockquote>
+
+<p>Much the same way a carpenter uses a hammer to put in a nail and a screwdriver to put in a screw, developers <strong><em>should</em></strong> choose their tools based on the problem at hand, not based on programming ideology. Just because you know Java considerably well doesn&#8217;t mean that Java should be used in all situations, like website scraping. Ruby or Perl would be much better suited to handle the retrieval and parsing of webpages, due to the better Regular Expression integration.</p>
+
+<p>Scraping websites is just one example of a trillion different scenarios. I&#8217;ve run into this quite a bit lately, where a developer choose a language or framework due to ideology, and it&#8217;s been driving me crazy. Use the right tool for the job, and move on with it. My career and more importantly my <em>abilities</em> are not defined by the tools I use, but by my ability to solve the problem. Just as a carpenter is not defined in skill by whether he uses Dewalt or Craftsman, but by the experience he&#8217;s had building staircases or handcrafting beautiful pieces of furniture.</p>
+
+<p>So, as a rule of thumb, write this down:</p>
+
+<blockquote><p>Your usefulness is defined by your experiences and ability to solve problems, not necessarily by the tools you use along the way.</p></blockquote>
+
+<p>This will always make you better when you apply this knowledge. Pick the right tool for the job, and ignore the detractors who say that Java is better than Ruby because it has compile-time checking and IDE support.</p>
+
+<h3>What good are tools then?</h3>
+
+<p>I&#8217;m glad you asked. Tools are simply meant to increase productivity and ease manual labor. Simple machines like the lever and pulley were undoubtedly created to alleviate the difficulties of certain types of manual labor, like raising heavy objects up to a higher plane. In other words, some caveman decided to solve a problem in a more convenient way: push the rock up the hill rather than try to heave it up a cliff.</p>
+
+<p>In a similar vein, programming languages and frameworks are created to solve specific problems, which in turn makes them great tools for getting things done. There are thousands of languages out there to use, each of them created to solve a specific need that the creator couldn&#8217;t solve effectively with other tools. They found the need, so they created the tool, and now we all can use the tool to solve the given problem again and again.</p>
+
+<p>So please don&#8217;t confuse yourself into thinking that the tools you use are what makes you great. The tools you use today will be outdated in five years or less, guaranteed. Your <em>ability</em> to solve problems with the proper tool is what makes you great.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/are-you-a-problem-solver-or-a-tool">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/fighting-the-cubicle-uprising">Fighting the Cubicle Uprising</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-10-19 23:26:10 -0600" pubdate  updated >Oct 19<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mind you, that&#8217;s <em>cubicle</em>, not <em><a href="http://www.joeydevilla.com/2009/05/03/cubical-vs-cubicle/">cubical</a></em>, just so we&#8217;re all clear.</p>
+
+<p>Technically speaking, the cubicle uprising occurred probably somewhere in the late 70&#8217;s (don&#8217;t check my sources on that though). I&#8217;m not talking about when cubicle&#8217;s gained souls and thrust their way from poverty into national prominence, that technically hasn&#8217;t happened yet.</p>
+
+<p>I&#8217;m talking about the time when Corporate America was born and decided that it was cheaper to put people in boxes to cloud their thinking and judgement. So it&#8217;s probably a futile attempt to overthrow the archetypal mind-prison for <em>everybody</em>. That&#8217;s why I&#8217;m just fighting my own fight. You can come too, if you want.</p>
+
+<p><img src="/static/images/cubicle.jpg" alt="Ahh, the cube farm" /><br/>
+I can see the violence inherent in the system! Can&#8217;t you?</p>
+
+<p>Today at work we had a discussion about how many more programmers we could fit into the programmers office. Our office is a 25&#8217;x20&#8217; rectangle. We currently have 5 programmers working in this office, but we&#8217;ve had 6 before. My thought is that we could get 2 more than our old max, pushing us to 8. Now, that means we could have 8 programmers in our room <em>comfortably</em>.</p>
+
+<p>Oh, and none of us are in cubicles&#8230; <em>yet</em>. I intend to keep it that way.</p>
+
+<h3>Fight back you coward!</h3>
+
+<p>When I was hired on, we had these kind of faux-wood heavy desks with hutches. Technically we still have some of those, a few of our guys are still in them. Ben and I got snooty though and decided to buy our own from <a href="http://www.ikea.com/us/en/catalog/products/S49852135" title="This base, with some other top">IKEA</a>. It was the best idea, still love that we did it. The company even paid us back for them, which was even cooler.</p>
+
+<p><img src="/static/images/feng-shui-office.jpg" alt="You are so jealous" /><br/>
+No, the back of his desk is not an appealing view. Hence the need for diffuse lighting.</p>
+
+<p>The reason I was snooty and wanted a fancy desk is two-fold: 1) I didn&#8217;t really like the big desk with the hutch and stuff, it was WAY more desk than I needed; 2) I&#8217;d like to think that the cleaner lines of the IKEA desk are simply more pleasing to my design-centric eye, so I just enjoy being at my desk that much more. And why shouldn&#8217;t I? On average we spend roughly two-thousand hours sitting at our work desk each year. Why not have it be a cool desk you like, with a glow lamp in the corner and a cool green bamboo plant growing nearby. Feng-shui baby.</p>
+
+<p>Back to the story, the one I was telling before my snooty tangent, the one about the programming room. The other strategy was to get as many programmers (i.e. cubicles) into the room as we could. Scratch that, apparently they are called Work Spaces now. Bah! And a <a href="http://www.edmunds.com/media/reviews/top10/05.cars.worst.residual.value/05.ford.focus.500.jpg" title="Ford Focus">Ford Focus</a> is an <a href="http://cache.jalopnik.com/cars/assets/resources/2008/01/G-Power%20Hurricane%20BMW%20M5.jpg" title="BMW M5. Oh the salivation...">M5</a>. You might as well sprinkle sugar on a turd and call it delicious. It ain&#8217;t adding up. Calling it one thing doesn&#8217;t make it something other than what it is. Call the pot black. It&#8217;s a cubicle: a box constructed of cheap material for managers and investors to save some coin at the expense of employees hating their environment every day. &#8220;But it only has 3 sides, it can&#8217;t be a cubicle!&#8221;, you stammer. Believe me my friend, it&#8217;s just a cubicle. The same awful open-box with closed-thinking built right in!</p>
+
+<p>The programmers were luke warm to the cubicle idea, but it scared the crap out of me. I thought my cube days were over, solitary confinement in the gray dungeon a thing of the past. So I spoke up, and denounced that my days of cube-sitting were gone with the days of Tech Deck skating and &#8220;¿Gracias por llamar a <a href="http://www.tni.com" title="Morinda Citrofolia, brought to you by Tahitian Noni International! Ya, I hate it too, it's okay.">Morinda</a>, como le puedo ayudarle?&#8221;.</p>
+
+<p>My assertion was enough to sway the powers-that-be, so let us pray that if/when we hire those additional code monkeys we&#8217;ll be getting them some nice IKEA desks instead of the beige-cage.</p>
+
+<p><strong>What have you stood up for today?</strong></p>
+
+<p><strong>Update:</strong> Apparently Robert Propst, the designer of the <a href="http://www.hermanmiller.com/Products/Action-Office-System" title="The current Action Office workspace design">Action Office</a> (what the cubicle originated from), called the cubicle a <a href="http://en.wikipedia.org/wiki/Action_Office" title="And I completely agree">&#8220;monolithic insanity&#8221;</a>. I couldn&#8217;t agree more.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/fighting-the-cubicle-uprising">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/my-git-workflow">My Git Workflow</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-10-15 21:59:19 -0600" pubdate  updated >Oct 15<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently at work we&#8217;ve taken a giant leap forward in our software stack: We ditched CVS and are riding the <a href="http://gitscm.org">git</a> bandwagon.</p>
+
+<p>And oh what a pretty red wagon it is. Drawn by the big Clydesdales with fancy harnesses. In this article I aim to show the workflow I&#8217;ve been using that I feel will help other people just getting in to git.</p>
+
+<h3>What&#8217;s this &#8220;git&#8221; you speak of?</h3>
+
+<p>Just a small caveat: if you already know what git is, or if you don&#8217;t care about how I got into git, <a href="#workflow">skip ahead</a>. Sometimes I&#8217;m boring and I can&#8217;t help it.</p>
+
+<p>Git&#8217;s been coming along nicely for the last few years gaining all sorts of popularity in the face of Subversion&#8217;s apparent lead, and CVS&#8217;s mind-boggling IE6-like stranglehold on the Version Control Systems universe. A lot of the current fervor attributed to git is attributed to several popular open source projects changing their SCM from Subversion to Git, most notably (for me at least) <a href="http://rubyonrails.org" title="Ruby on Rails">Ruby on Rails</a> and their switch to <a href="http://www.github.com/rails/rails" title="Rails on Github">Github</a>.</p>
+
+<p>I&#8217;ll admit that I had no idea who or what git was until mid-2008 when a co-worker of mine told me he wanted to get into it (no pun intended). I was in my nice cozy comfortable Subversion shell at the time and thought how could one possible want anything more than SVN? Ironically, after using git for the past year or so, I&#8217;m thinking the same thing from the git perspective. <em>How in the world</em> are people still using SVN (assuming they have the choice)? Ya, I don&#8217;t know either.</p>
+
+<p>Due to much of git&#8217;s current popularity coming from the Rails switch, a lot of the git info you read online comes from people doing stuff in <a href="http://ruby-lang.org" title="Ruby the programming language">Ruby</a>. This was certainly my main usage of git after I finally took the plunge late last year, using it to manage the version control of all my Rails/Sinatra projects. Of course, with any VCS, the content you are versioning need not be a specific software project at all. You could use it to version your photoshop design files if you wanted to.</p>
+
+<h3>How sweet it is to be loved by git</h3>
+
+<p>Anyways, at work we use Java. And up until about a month ago, we were using CVS to manage our software versioning. We&#8217;ve been doing a great round of tech discussions to improve our stack, and the CVS to Git migration was one of the first targets we moved against, due to the relatively simple nature of the change. I&#8217;ve got to credit <a href="http://benmatz.wordpress.com" title="Ben">Ben</a> for randomly deciding to demo git to everybody in one meeting. I just let him run with it, though I probably know git a lot better. By the end of the meeting we were all like, &#8220;Okay, so when do we start using it?&#8221;. I was floored. I thought for sure there&#8217;d be reservations and assumed that if we ever did get off of CVS it&#8217;d be to Subversion. Well, just a few short weeks later we had imported our entire repo into Git (approximately 900 mb). A few weeks after that, we were completely dependent on git for our VCS of choice. And boy does it feel sweet.</p>
+
+<p>Not a day goes by when <em>someone</em> in dev just randomly exclaims, &#8220;How freaking sweet is Git?!&#8221;, or, &#8220;Git is just so fast!&#8221;. I love hearing this stuff, cause it reinforces my belief that git really is a superior VCS. It brings some passion back into what we do each day. A software developer&#8217;s tools should always enhance their ability to put out great software. Git does just that.</p>
+
+<p>Okay, so that was the boring back story, here&#8217;s some of the meat of git that we&#8217;ve been working with. Most of these concepts were taken in one form or another from the <a href="http://www.kernel.org/pub/software/scm/git-core/docs/gitworkflows.html" title="Git workflow suggestions">Git Workflow manpage</a>.</p>
+
+<p><a name="workflow"></a></p>
+
+<h3>Topic Branches</h3>
+
+<p>The best thing I pulled from the git workflow article is the concept of the <strong>topic branch</strong>. In git, branching doesn&#8217;t create new filesystem directories, it just magically handles it all in the cloned repository. This was a huge upgrade from CVS and even Subversion in my opinion. It&#8217;s one of the biggest reasons I love git so much. Branching is cheap, therefore much more useful.</p>
+
+<p>Topic branches aren&#8217;t a special kind of branch, it&#8217;s just a way of thinking about how to use branches for effective project development. Git creates a default branch for your trunk or mainline of development and calls it &#8220;master&#8221;. Each time the project manager assigns me a project (in this case say the project is called &#8220;widget&#8221;), I follow this workflow:</p>
+
+<div><script src='https://gist.github.com/211594.js?file='></script>
+<noscript><pre><code># This is a simple descriptor on how I do topic development using git
+# Some of the commands are java flavored (like ant),
+# but that doesn't mean you can't use this with other languages.
+
+# Step 1 - Synchronize master.
+# 1.1 - Checkout master branch
+# 1.2 - Get changes from origin
+git checkout master
+git pull
+
+# Step 2 - Create a new branch to do all widget development.
+git co -b widget
+
+# Step 3 (recursive) - Write tests, write code, and commit.
+# For every user story in the project, follow this flow:
+# 1.1 - Write tests
+# 1.2 - Write code to pass the tests
+# 1.3 - When the story is completed and the tests pass, commit the code.
+# Lather, rinse, repeat until code complete on the project
+git add .
+git commit -m &quot;Some message about your commit&quot;
+
+# Step 4 - Synchronize master
+# 4.1 - Fix any conflicts and commit
+git checkout master
+git pull
+# Do 4.1 if you need to
+
+# Step 5 - Merge the topic branch into master
+# 5.1 - Fix any conflicts and commit
+git merge widget
+# Do 5.1 if you need to
+
+# Step 6 - Fix conflicts, run compiles, run tests
+# If tests or compilation fail, go back to step 3
+ant compile
+ant test # or whatever testing procedure you use
+
+# Step 7 - Push code to origin
+# Only perform this step once you have resolved
+# all conflicts and all automated tests pass
+git push origin master
+
+# Step 8 - Remove your topic branch when topic development has ceased
+git branch -d widget</code></pre></noscript></div>
+
+
+<p><strong>How do you manage your projects with git?</strong></p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/my-git-workflow">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/techno-hurdles-and-writers-block">Techno Hurdles and Writers Block</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-10-14 11:42:18 -0600" pubdate  updated >Oct 14<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>You&#8217;ve patiently awaited results (don&#8217;t deny it) from my <a href="/blog/learning_how_to_focus" title="Learning how to focus">previous post</a>, and indeed I&#8217;ve been planning on it. Sometimes plans don&#8217;t work out how we expect them to. And sometimes they do. Here is part 2 of <a href="/blog/learning_how_to_focus" title="Learning how to focus"><strong>Learning how to focus</strong></a>.</p>
+
+<p>Approximately 6 weeks ago I <a href="/blog/learning_how_to_focus" title="Learning how to focus">deleted my Twitter and Facebook accounts</a>. It was an impulsive move. An idea came to me, I talked to my wife about it, we agreed, and I just did it. There wasn&#8217;t a lot of drama involved, I had just gotten to the point where I felt I was losing valuable time using those services. I&#8217;m not going to go into more of the &#8220;why&#8221; details, I already <a href="/blog/learning_how_to_focus" title="Learning how to focus">did that</a>.</p>
+
+<h2>The positive stuff</h2>
+
+<p>Since purging the web-social scene from my daily life, I&#8217;ve noticed a lot of positive gains. For one, I&#8217;m a <em>lot</em> more focused while at work. We&#8217;re talking orders-of-magnitude more focused. Before it was easy to spend a lot of time posting stuff on Twitter or reading people&#8217;s Facebook updates. Now, those distractions are not just archived, they&#8217;re completely gone.</p>
+
+<p>Since &#8220;the purge&#8221; I&#8217;ve hit all my project deadlines at work, something that is actually fairly difficult for a developer to do in a <a href="http://en.wikipedia.org/wiki/Waterfall_development" title="Waterfall Development Model">serial environment</a>. Well, I hate sweeping generalizations; <strong><em>I</em></strong> have a hard time hitting deadlines in a serial environment, though I&#8217;m not alone, just go read some <a href="http://martinfowler.com/articles.html#id22657" title="Fowler Articles on Agile Programming">Fowler</a> essays on Agile Programming.</p>
+
+<p>Speaking of Fowler, I&#8217;ve totally come to love the essays he writes about <a href="http://martinfowler.com/articles/designDead.html" title="Fowler: Is Design Dead?">software design</a>, <a href="http://martinfowler.com/articles.html#id22657" title="Fowler Articles on Agile Programming">agile programming</a>, test-driven development, etc. He&#8217;s just a genius, and a great writer. If you write code, you should read Fowler. I never would have had time to read any of his stuff had it not been for &#8220;the purge&#8221;. As a side note, I&#8217;m using <a href="http://www.marco.org/about" title="Marco Arment">Marco&#8217;s</a> <a href="http://instapaper.com" title="Instapaper iPhone App">Instapaper</a> iPhone app on any article I&#8217;d like to read, but want to &#8220;read later&#8221;. It&#8217;s my number one app. Go <a href="http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=288545208&amp;mt=8" title="Instapaper on the App Store">buy it</a>.</p>
+
+<p>One facet of the purge was removing a lot of RSS feeds from my daily intake. I kept around 40 or so, though most have a post frequency of less than 1 per week, so I rarely have more than 3 or 4 articles at a time in reader. This is really nice because I still can get some info I want, but my take has been that it&#8217;s completely non-pressuring me. I don&#8217;t feel the desire to constantly check, because I know that there probably isn&#8217;t anything there. There are stretches of days where I don&#8217;t even check it because it&#8217;s completely off my mind. This is <em>exactly</em> the kind of thing I was going for.</p>
+
+<h2>The weird stuff</h2>
+
+<p>There have definitely been some weird side-effects to the purge. For example, when I read an interesting blog post or listen to a cool song, or whatever, I <em>still</em> (to this day) think about posting it to Twitter/Facebook. I mean, that&#8217;s how addicted I was. It&#8217;s kind of like my withdrawal cravings I guess. Still, very weird.</p>
+
+<p>Something else weird happened: I turned into an old man. Over the past few weeks, my average bed time has gotten earlier than before. I&#8217;m now going to bed between 10 and 11, sometimes even earlier. Just a few days ago I literally fell asleep at 8:30 pm. I&#8217;m crazy like that.</p>
+
+<h2>The &#8220;huh?&#8221; stuff</h2>
+
+<p>You may have noticed that I haven&#8217;t posted a ding-dang thing since I wrote about the purge. Along with the purge came a huge case of writers block. I mean, we&#8217;re talking mammoth. I have had a continual desire to <em>want</em> to blog and write stuff that is random and annoying, but I just haven&#8217;t gotten to the point of writing it. It&#8217;s really weird, possibly coincidental to the time period. If you followed this blog before when it was on wordpress, you&#8217;ll know that I had gotten less frequent in those postings too, so maybe it&#8217;s a deeper issue. I do love how Marco talks about <a href="http://www.marco.org/93193436" title="marco.org: Avoiding the Blogger trap">not caring</a> about the frequency of posts on his blog, that he blogs <a href="http://articles.marco.org/261" title="marco.org: Do your own thing">whatever and whenever</a> he wants to. This is totally the style of blog I want to cultivate. I&#8217;ve just not really had the drive to post at all lately. And it&#8217;s bugging me.</p>
+
+<p>Sure, this post is a new post on the blog. So I guess it&#8217;s good that I&#8217;m getting some of it out there. I just want a bit more consistency. Not like, &#8220;I must blog every 2 days&#8221; or something stupid, just&#8230; you know, semi-regular updates. When I get an idea about a post, I want to just write it and post it. So that&#8217;s something I&#8217;m working on.</p>
+
+<p>Probably the biggest frustration that I&#8217;ve hit is the lack of motivation to work on my entrepreneurial pursuits. I have literally done nothing towards furthering my goal of being an independent business owner. Usually I reserved evenings or saturday&#8217;s for times when I could push forward on my ideas, and I&#8217;ve just completely fallen out of that routine. This is probably the biggest head-scratcher of the whole purge process. It was when I was &#8220;addicted&#8221; to the consumption of information that I was passionate about working on my ideas. Now that the addiction is gone&#8230; so is the passion. I&#8217;m not entirely convinced the two are related, so I&#8217;m still working through a lot of that in my head. Crap&#8230; that makes me sound like a manic-depressive psychopath. Just know that I&#8217;m not. I promise.</p>
+
+<p><strong>What are some gains or shortfalls you&#8217;ve seen in me since the purge? What about yourself?</strong></p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/techno-hurdles-and-writers-block">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/learning-how-to-focus">Learning How to Focus</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-08-26 21:24:07 -0600" pubdate  updated >Aug 26<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There&#8217;s an interesting saying that is a golden proverb, one that has descended the ages:</p>
+
+<blockquote><p>[&#8230;] and yet the true creator is necessity, who is the mother of our invention.<br/>
+&#151; Plato, <a href="http://classics.mit.edu/Plato/republic.3.ii.html" title="Plato's Republic">The Republic</a></p></blockquote>
+
+<p>It&#8217;s been adapted over the years to read simply: &#8220;Necessity is the mother of invention&#8221;. If you&#8217;re unfamiliar with the phrase, or don&#8217;t quite remember what it means, I&#8217;ll give you my interpretation. It means that invention (or ingenuity) is spawned from a direct need or necessity. Ideas and Machines and Businesses are all created because of an attributable need of some force, be it human or otherwise.</p>
+
+<h3>Washing Machines &amp; Microsoft</h3>
+
+<p>A few months ago I had a weird thought pop into my head when I heard that phrase during the day. I thought, &#8220;Sure, in most cases necessity <em>is</em> the mother of invention, or the cause of why the invention was created. But if you reversed the phrase, would it also be true? <strong>Could Invention be the mother of Necessity?</strong>&#8221; At first you may dismiss this as a mere play on words and give it no further thought. But go back and read it again:</p>
+
+<blockquote><p>Invention is the mother of necessity.<br/>
+&#151; My weird brain</p></blockquote>
+
+<p>Could it be, that a real need or necessity created these ideas and inventions and businesses, and once the ideas and inventions and businesses were created, they created and psychologically enforced a &#8220;need&#8221; to use them. Take for example the washing machine<sup><a href="#note1" title="Note 1">1</a></sup>. It was <em>invented</em> because a real need existed. People doing their washing all over the world had to do it by hand, which was slow and hard and probably boring. What if someone created a turning basin that would make sure all the clothes were scrubbed together without having to do it manually? Of course, I&#8217;m sure the washing machine wasn&#8217;t met with immediate overnight success like MySpace or something. Customers were probably sparse at first, but surely as you&#8217;re reading this post right now, the washing machine grew in popularity and ubiquity because it fulfilled an enormous need.</p>
+
+<p>And here we are <a href="http://en.wikipedia.org/wiki/Washing_machine#Washing_machine_milestones" title="318 years after the first washing machine patent">318 years</a> after the first washing machine patent was issued. And <em>everyone</em> has got a freaking washing machine. Ok, I know the kids in Africa don&#8217;t, and college students and other poor people, but still, it&#8217;s a big market by even Microsoft&#8217;s standards. But let&#8217;s get back to my thought. I&#8217;ll agree whole-heartedly that the washing machine was invented because of a real need. But now, because we have the washing machine we kind of have to use it, don&#8217;t we? I&#8217;m not entirely convinced either, but it&#8217;s a weird loop to get into if you&#8217;ve got some time to kill.</p>
+
+<h3>Bit by Bit</h3>
+
+<p>And so we jump from washing machines to one of the most incredible and unbelievable inventions ever created: the Computer Processor (see <sup><a href="#note1" title="Note 1">1</a></sup>). From ENIAC to iPhone, the computer processor has absolutely transformed the world culture more completely than perhaps any other invention has ever done, certainly faster than any other. This pace of evolution was quickened significantly by the arrival of the internet nigh-on twenty years ago (thanks, Mr. Gore).</p>
+
+<p>Entrepreneur&#8217;s have flocked by the millions to the internet in hopes of cultivating some small corner for their prospective ideas. In this case, the invention of the internet has created a vacuum so strong that for the last 20 years the world has been frantically scrambling to catch up to the opportunities that multiply exponentially each day. As with every free market, there are giants and there are peasants. The internet giants are the household names: Google, Wikipedia, Digg, Craigslist, Facebook, Twitter, etc. They&#8217;re so widespread that my grandma probably knows Google, Facebook and Wikipedia, even if she&#8217;s not sure what they are or how you would use them. Anyone with a lick of sense can tell you that the ones who are making internet Empires are building them on top of some form of content aggregation. In the design, marketing, and advertising industries, the saying goes that <strong>Content is King</strong>.</p>
+
+<p>The problem with having all of this information being so readily available is that it creates the need to process it. The necessity of finding and consuming information exists due to ease of acquiring it. Okay, let me back up a bit&#8230; the problem <strong><em>I</em></strong> have with the internet is <strong><em>my</em></strong> need to process as much information as possible. Programming, Business, Design, Comics, Photos, Friend Updates; all these things cry out for attention, and often I oblige. Much too often.</p>
+
+<h3>Why, _why?</h3>
+
+<p>On August 19th, 2009, one of the biggest names in the Ruby industry <a href="http://news.ycombinator.com/item?id=773106" title="The disappearance of _why">disappeared</a> entirely and completely from the internet. <a href="http://en.wikipedia.org/wiki/Why_the_lucky_stiff#cite_note-whymirror-3" title="_why's Wikipedia entry">Why the lucky stiff</a> (who often goes simply by &#8220;why&#8221; or &#8220;_why&#8221;) trashed all his sites, github projects, and any other notable web presence completely. At first people were afraid he had been hacked big time, or feared that he had been physically hurt or even killed. All of this was a bit overkill if you ask me. The final few days on his twitter account he continually posted rhetorical questions about the purpose of life and programming. _why didn&#8217;t get shot or hacked, he got sick of information overload. He got tired of having to be defined by what the masses thought of him, so he bailed.</p>
+
+<p>I was <em>surprised</em> because you just don&#8217;t see that kind of thing happening to high-profile people online (unless they really did get hacked). I was <em>sad</em> because he&#8217;s contributed in some ways to my love for the Ruby programming language (his TryRuby site was key to that), such that I feel like the Ruby community did take a substantial loss. I was <em>intrigued</em> because of the sheer style in which he went out. He knew what he was doing, probably had been planning it for a few months now, possibly even years. He hit a wall. A wall where the invention created a necessity he felt he could no longer support.</p>
+
+<h3>Operation &#8220;_why not&#8221;?</h3>
+
+<p>Since the day _why went offline (7 days ago) I&#8217;ve been formulating a bit of my own escape plan. Last night, I launched the first (and possibly only) phase. Time will tell if there are additional phases. You may have already noticed some of the effects of my actions. The first is that you will notice that my recent tweets no longer show at the bottom of this site. Yes, <strong>I deleted my Twitter account</strong>. Not only mine (@localshred), but OSG&#8217;s as well (@onesimplegoal). Go ahead, go check, I&#8217;ll wait. Right, are you back? Okay, good. <strong>I also deleted my facebook account</strong>. Not deactivated, I actually found the link to completely delete the account. It&#8217;s supposed to be deleted in about 13 days, though I&#8217;m supposedly able to cancel the request at any time before it happens. I won&#8217;t be. The third strike was drastically truncating the majority of my RSS feeds. I now only subscribe to family blogs and photo feeds, as well as a few key tech/programming resources like <a href="http://www.37signals.com/svn" title="37Signals blog">37Signals</a> and <a href="http://www.codinghorror.com" title="Jeff Attwood's blog">Jeff Attwood&#8217;s blog</a> (and yes, <a href="http://www.xkcd.com" title="XKCD comic">xkcd</a> made the cut).</p>
+
+<p>You may be perplexed by my actions. To tell you the truth, I am still a bit perplexed that I actually went through with it. Quite a few months ago I went through a similar purging excercise, but not to the extent of deleting accounts. The best answer I can give is that I feel like my need to consume and digest information is completely getting in the way of my progress as a programmer and human being. I crave it, need it, just like a drug. And some days it&#8217;s all I can think about and act upon.</p>
+
+<p>I&#8217;m not sure if I&#8217;ll ever create a facebook account again, as much as I really did enjoy it when I had a small number of friends who mattered to me. I am fairly certain, however, that I will utilize twitter at some point in the future as owning a business becomes more a part of my day to day activity. But for now, I&#8217;m partially following _why&#8217;s example and turning off the invention in order to subdue the necessity. Here&#8217;s to learning how to focus. Cheers.</p>
+
+<hr />
+
+<h4>Notes</h4>
+
+<ol>
+<li><a name="note1"></a>I have never done, nor plan to do any research on the invention of the washing machine (or computer). :)</li>
+</ol>
+
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/learning-how-to-focus">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/why-you-want-me-to-work-for-you">Why You Want Me to Work for You</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-08-18 23:34:33 -0600" pubdate  updated >Aug 18<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The day you have all been waiting for has finally arrived: rand9 Technologies is officially accepting clients for projects in <strong>Web Application Development</strong>, <strong>Graphic Design</strong> (including <strong>Logo</strong> &amp; <strong>Site Design</strong>), and <strong>Software Project Consultation</strong>.</p>
+
+<p>This article is meant to detail my desire to start building a successful client-work business.</p>
+
+<p>Quite often I&#8217;m approached by friends, family, or associates about building [insert application name here], or desinging the branding for [company xyz]. Up until a few weeks ago my response is generally somewhere along the lines of, &#8220;Thanks, but no thanks.&#8221; All that has changed recently as I&#8217;ve decided to turn rand9 into a full-fledged client-work business. I&#8217;ll be focusing on three areas of my expertise, detailed below, but if you have any work that falls outside of these lines, please don&#8217;t hesitate to <a href="mailto:bj.neilsen@gmail.com?subject=rand9%20Project%20Proposal">contact me</a> and we can discuss your project.</p>
+
+<h3>Web Application Development</h3>
+
+<p>I&#8217;ve been finagling web applications for the past 7 years in PHP, Java, and Ruby. On one hand, I&#8217;ve worked on horrible hack-job projects, often outsourced to India; &#8220;Apps&#8221; that you couldn&#8217;t really call Apps at all. On the other hand, I&#8217;ve worked on beautifully crafted Object-oriented systems that were well thought out and cleanly implemented. In other words, I&#8217;ve been around the web application block a few times. I&#8217;ve seen enough to know what works well, what will most likely do the job, and what is doomed to failure.</p>
+
+<p>My application development experience leans almost exclusively towards framework-driven object architectures. It&#8217;s a fancy way of saying, &#8220;I believe in and use extensively stable and up-to-date programming software and practices.&#8221; I&#8217;ve custom-built everything from a simple blog to a PDF-processing Web-to-Print software engine that supports private-branded portals.</p>
+
+<h3>Graphic Design</h3>
+
+<p>My software background is complemented beautifully by my design capabilities. I&#8217;ve been studying usability and design for over a decade, and have regularly put out logos, site designs, and print work for a variety of project scopes and mediums. I&#8217;ve designed posters for the Children&#8217;s Miracle Network, Logos for several startup companies, and numerous site designs. I&#8217;m even available to design and build micro-layouts within an already designed site.</p>
+
+<h3>Software Project Consultation</h3>
+
+<p>It may sound incredibly nerdy, but I <strong><em>love</em></strong> talking about software. I love to discuss the theory behind the implementation, to critique the pattern-flow of an object architecture, to assess the feasability of an object-relational mapper. In short, I love to talk about what makes a project successful for the Businesses as well as exciting for the Developers writing the code. If your project is headed off the track, you need another pair of eyes to determine what is going wrong and how to get back on the track.</p>
+
+<h3>Other Project Needs</h3>
+
+<p>If you have any other projects that might not fit the molds above, feel free to <a href="mailto:bj.neilsen@gmail.com?subject=rand9%20Project%20Proposal">contact me</a> and I can assist or point you in the right direction (if I can).</p>
+
+<h3>What are you waiting for? Let&#8217;s build something awesome together!</h3>
+
+<p><strong>Name:</strong> BJ Neilsen<br/>
+<strong>Email:</strong> <a href="mailto:bj.neilsen@gmail.com?subject=rand9%20Project%20Proposal">bj.neilsen@gmail.com</a></p>
+
+<object type="application/x-shockwave-flash" data="https://clients4.google.com/voice/embed/webCallButton" width="230" height="85"><param name="movie" value="https://clients4.google.com/voice/embed/webCallButton" /><param name="wmode" value="transparent" /><param name="FlashVars" value="id=8eda661fa0af296f057d048650ed039044e7bddd&style=0" /></object>
+
+
+
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/why-you-want-me-to-work-for-you">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/movin-on-over">Movin&#8217; on Over</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-08-11 05:57:28 -0600" pubdate  updated >Aug 11<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>As you probably can tell, I&#8217;ve gone quiet on the blogging front for a while. It&#8217;s not you, it&#8217;s me. I&#8217;ve been lacking creatively for quite a while, being energetically drained by numerous sources that you don&#8217;t really need to worry yourselves over. Needless to say, I&#8217;m back into blogging form, or am attempting it yet again.</p>
+
+<p>I&#8217;ll likely be transitioning over to my new blog <a href="http://www.rand9.com" title="rand9.com">rand9.com</a>. I had initially intended to only post tech-specific things on that blog, and keep more personal matters over here, but this post changed my mind. I want to focus my energy on one blog, and I feel like the rand9 name is what I want to put my energy into.</p>
+
+<p>Fear not, I will continue to strive to put more content than just tech stuff over there, so you will still get the usual banter and rantings. I still plan on posting a lot about entrepreneurialism and projects that I&#8217;m engaged in. So head on over to the <a href="http://www.rand9.com">new blog</a> and give the few articles a read. Oh, and if you&#8217;ve subscribed to this blog&#8217;s RSS feed, be sure to do so <a href="http://feeds.feedburner.com/rand9">over there</a> as well. Thanks for all the feedback over this last year on these posts!</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/movin-on-over">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/doing-my-own-thing">Doing My Own Thing</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2009-08-11 04:44:33 -0600" pubdate  updated >Aug 11<span>th</span>, 2009</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In which I describe some of the ideas and thoughts behind my entrepreneurial spirit. It&#8217;s a bit of a rambler, but was very therapeutic for me in the writing.</p>
+
+<p>Yesterday I read an <a href="http://articles.marco.org/261" title="Marco Arment's \&quot;Do your own thing\&quot; Post">inspiring and enlightening post</a> from <a href="http://marco.org" title="Marco Arment">Marco Arment</a> titled <strong>&#8220;Do your own thing&#8221;</strong>. In the post he talks about gaining acceptance from the stoners at school simply because he &#8220;does [his] own thing&#8221; rather than the accepted norm of &#8220;partying&#8221;. He describes:</p>
+
+<blockquote><p>A stoned guy’s idle conversation became the goal for my life outlook. No other statement or occurrence has been more fundamental in making me stop worrying about what other people think and do, which in turn makes it true.</p></blockquote>
+
+<h3>In a rich man&#8217;s world &#8230;</h3>
+
+<p>Lately I&#8217;ve had a lot of thought units (similar to <a href="http://www.brianregan.com/" title="Brian Regan">goal units</a> ;)) focused and concetrating on developing a monetizable business product. <em>&#8220;But&#8221;, you say, &#8220;I thought you were running <a href="http://www.onesimplegoal.com" title="One Simple Goal">One Simple Goal</a>, the fastest growing web presence next to AOL and Friendster!&#8221;</em> Hold your horses there friend. To debunk you on two points:</p>
+
+<ol>
+<li>OSG is not fast* or growing (much to my chagrin). Though, to be fair, I haven&#8217;t really expected lots of popularity from it as I haven&#8217;t had a chance to promote it properly&#8230; yet.</li>
+<li>OSG has no monetization value in its current offering. That&#8217;s not to say I haven&#8217;t <em>thought</em> about monetizing it with ads or a &#8220;Go Pro&#8221; area where paying members get more tools and value. Just saying that I&#8217;ve only thought about it, but each time it&#8217;s like pulling teeth. I know I just don&#8217;t want to go through with that and ruin the OSG experience. &#8216;Nuff said.</li>
+</ol>
+
+
+<p>That&#8217;s not to say that I haven&#8217;t thought/dreamt of owning or running a business of my own. It&#8217;s actually something that I strive for every day, at all times some random background process in my head is slowly working on ideas and idealogies to move me forward in that quest. Obviously it&#8217;d go much quicker if I could work at it full time, but then the income would be scant for a while, which is basically a non-option at this point (i.e. mortgage, kids, food, etc). I mean, I know that other entrepreneur&#8217;s do the boot-strap thing, but at my current state, I don&#8217;t think it&#8217;d be wise or healthy to engage in that kind of masochism.</p>
+
+<h3>Back to our regularly scheduled program &#8230;</h3>
+
+<p>Where were we? Oh yes, monetizing a business product. The whole &#8220;doing your own thing&#8221; tag is great in concept, but application is a bit more difficult to manage. I&#8217;m not saying it&#8217;s anywhere approaching impossible or in the realm of moronic-thinking. Not saying that at all. I&#8217;m saying it takes dilligent and concerted effort. It takes knowing from the beginning what it is that you are searching for, searching to become. Because entrepreneurialism is really about <strong><em>being</em></strong> or <strong><em>becoming</em></strong> something, not just having to report to yourself at work each day instead of <a href="http://www.youtube.com/watch?v=k1Ejo-XKWmo" title="Your stupid boss">that guy</a>.</p>
+
+<p>So who exactly am I trying to be or become? What does &#8220;doing my own thing&#8221; look like? I can honestly say that I&#8217;m still trying to figure that out. I&#8217;ve known for more than 3 years that doing my own thing is what I want in life. I want to dictate what I work on, who I work with, and (most imporantly) <strong>why</strong> I am doing what I do. I&#8217;m a programmer, or developer, or whatever else you want to call me from that realm. That&#8217;s the majority of my skillset, what I know how to do to make the cash. I&#8217;ve been building web applications in PHP and Java for over 6 years now, and I&#8217;ve gotten pretty dang good at it. Unfortunately it just hasn&#8217;t been FUN for the last little while. Corporate mandates and bloated systems with bad code rot have kind of disenfranchised me from working on other people&#8217;s projets (read: my current and previous employers).</p>
+
+<h3>Oh Ruuuuuuby, Don&#8217;t take your love to town</h3>
+
+<p>Then along comes <a href="http://www.ruby-lang.org/" title="Ruby, the most wickedest programming language on earth">Ruby</a>, the most wicked-awesome programming language you&#8217;ve never heard of. Okay, maybe <em>you</em> have, the guy in the back with the glasses. But the rest of you, you know nothing of it. So let me enlighten you. It&#8217;s amazing. It really makes programming enjoyable, and dare I say, FUN again. One of my <a href="http://twitter.com/localshred/status/3127072169" title="One of my recent tweets">recent tweets</a> really describes it fully though:</p>
+
+<blockquote><p>I do more fist-pumping-programming in Ruby than Java. Probably a 10 to 1 ratio.</p></blockquote>
+
+<p>So, recently the thought process has been to follow a ruby path towards entrepreneurialism. That may include doing side-projects in ruby, or even setting up a full-fledged Client-Work company (ala rand9?) solely dedicated to building apps in Ruby, Rails, Sinatra, etc. It may involve getting heavily involved in building an app with a real monetization strategy, like a service people are willing to pay for (<em>Huzzah! for good ideas</em>).</p>
+
+<p>Whatever makes programming fun again, that&#8217;s how I&#8217;ll do my own thing.</p>
+
+<p><em>*Playful banter, you say? Go check out the awful performance lag for each request. It makes me madder than it makes you, I promise.</em></p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/doing-my-own-thing">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'rand9';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>About rand9</h1>
+  
+  <p><img src="http://www.gravatar.com/avatar/c8ef74aab2e973ba0f7da5557e0ba9a9?s=128&amp;d=identicon&amp;r=PG" width="" height="" alt="BJ Neilsen" title="BJ Neilsen"></p>
+
+  <p>rand9 is the outpouring of though from <a href="http://twitter.com/#!/localshred" title="@localshred">@localshred</a>; Father of two, developer, lead software architect <a href="http://twitter.com/#!/MoneyDesktop" title="@MoneyDesktop">@MoneyDesktop</a>, soccer coach &amp; fanatic, <a href="http://twitter.com/#!/RealSaltLake" title="@RealSaltLake">@RealSaltLake</a> devotee, gardener, chicken-raiser, infrequent triathlete, climber, and all around outdoors enthusiast.</p>
+
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/picking-the-right-number-as-quickly-as-possible">Binary search in ruby, or, &#8220;Picking the right number, as quickly as possible&#8221;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/git-pre-receive-hook-for-rejecting-a-bad-gemfile">Git pre-receive hook for rejecting a bad Gemfile</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/thor-script-for-managing-a-unicorn-driven-app">Thor script for managing a Unicorn-driven app</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/mapping-object-values-with-rubys-ampersand-symbol-technique">Mapping object values with Ruby&#8217;s ampersand-symbol technique</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/areas-of-focus">Areas of Focus</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("localshred", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/localshred" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @localshred</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - BJ Neilsen -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>
