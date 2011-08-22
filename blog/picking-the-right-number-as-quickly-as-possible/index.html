@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>rand9: Binary search in ruby, or, "Picking the right number, as quickly as possible"</title>
+  <meta name="author" content="BJ Neilsen">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://rand9.com/blog/picking-the-right-number-as-quickly-as-possible"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/rand9-blog" rel="alternate" title="rand9" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6580389-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">rand9</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/rand9-blog" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:rand9.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry">
+  
+  <header>
+    
+      <h1 class="entry-title">Binary Search in Ruby, or, &#8220;Picking the Right Number, as Quickly as Possible&#8221;</h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-07-01 10:25:38 -0600" pubdate  updated >Jul 1<span>st</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+<div class="entry-content"><p>So you&#8217;re writing a parser in C that parses the lines of a file. The line you&#8217;re parsing is made up of a 40 character key and any number of ip addresses after, space-separated. You need to know a max line length to read (because C is mean like that), but you&#8217;re not sure how many ip&#8217;s you can fit on a line for a given key.</p>
+
+<p>Such was my case yesterday and decided to write a mini script in ruby to figure it out. My first stab was to iterate from 1 to 100 and checking the line lengths by literally building a line with x number of ip elements on the line. While the code was correct and produced the necessary information for the given inputs, it was horribly inefficient and so I decided to rewrite it to be smarter. Enter the <a href="http://en.wikipedia.org/wiki/Binary_search_algorithm" title="Binary Search Algorithm">Binary search algorithm</a>.</p>
+
+<p>Using the binary search algorithm, we take a lower and an upper bound of possible elements and try to quickly guess which number is the highest possible without exceeding the line limit. So here&#8217;s the concrete data we know. The line format (as described above) will look something like this:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'><span class="mi">86</span><span class="n">f7e437faa5a7fce15d1ddcb9eaeaea377667b8</span> <span class="mf">174.18.0.1</span> <span class="mf">174.18.0.2</span> <span class="mf">174.18.0.3</span> <span class="mf">174.18.0.4</span> <span class="mf">174.18.0.5</span> <span class="mf">174.18.0.6</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>&#8230; with theoretically unlimited ips per line. The first value is a key we&#8217;ll use to store the ips against in a lookup table, but don&#8217;t worry about that right now. The key is generated using sha1 digesting, so we know it will always be 40 characters. The max length for any given ip address is 15 assuming all 4 blocks are at least valued at 100 (e.g. 100.100.100.100). Space-separating the key and x number of ips and your line length calculation is <code>f(x) = kl + (el*x) + x</code> where <code>x</code> is line length, <code>kl</code> is key length, and <code>el</code> is element length (ip address length). In other words, if we&#8217;re testing 50 elements on the line, the line length would be <code>40 + (15*50) + 50</code> which equals <code>840</code>.</p>
+
+<p>Now that we can arbitrarily calculate the length of a line based on the number of ip elements we want to test, we can start &#8220;guessing&#8221;. This isn&#8217;t guessing at all, we just split our possible range in half and use the middle ground to test the possible length. In other words, if my initial range is 1..100 (read as &#8220;anywhere from 1 ip element to 100 ip elements&#8221;), then our first test value for <code>x</code> above would be 50, which if you remember produces a line length of 840. I assumed that I&#8217;d be okay with a max line length of 1000 characters, and so we assert that if <code>len</code> is less than the max, then we can use the upper half of the range boundary, or <code>50..100</code>. If <code>len</code> was more than our max of 1000, we&#8217;d take the bottom half, or <code>1..50</code>.</p>
+
+<p>Using this technique recursively we can whittle down to the exact number of ip elements that can be inserted on a line before we go over the limit of 1000 characters on the line, which happens to be 60. You know you&#8217;re done checking when your range is only one element apart, in this case 60..61. With my first solution to iterate up from 1 to 100, this meant we had to check 61 times before we knew we were over the limit. <strong>With this new range, we actually only needed 8 iterations!</strong> Very cool how &#8220;guessing&#8221; can solve the problem quite nicely.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+<span class='line'>43</span>
+<span class='line'>44</span>
+<span class='line'>45</span>
+<span class='line'>46</span>
+<span class='line'>47</span>
+<span class='line'>48</span>
+<span class='line'>49</span>
+<span class='line'>50</span>
+<span class='line'>51</span>
+<span class='line'>52</span>
+<span class='line'>53</span>
+<span class='line'>54</span>
+<span class='line'>55</span>
+<span class='line'>56</span>
+<span class='line'>57</span>
+<span class='line'>58</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">require</span> <span class="s1">&#39;digest/sha1&#39;</span>
+</div><div class='line'>
+</div><div class='line'><span class="vi">@k_len</span> <span class="o">=</span> <span class="no">Digest</span><span class="o">::</span><span class="no">SHA1</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>     <span class="c1"># 40</span>
+</div><div class='line'><span class="vi">@ip_len</span> <span class="o">=</span> <span class="s2">&quot;255.255.255.255&quot;</span><span class="o">.</span><span class="n">size</span>              <span class="c1"># 15</span>
+</div><div class='line'><span class="vi">@range</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">100</span>                               <span class="c1"># starting range</span>
+</div><div class='line'><span class="vi">@max_line_len</span> <span class="o">=</span> <span class="mi">1000</span>                          <span class="c1"># length to check against</span>
+</div><div class='line'><span class="vi">@count</span> <span class="o">=</span> <span class="mi">0</span>                                    <span class="c1"># iteration counter</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Given a upper and lower boundary, determine if its</span>
+</div><div class='line'><span class="c1"># middle value is over or under the given line length</span>
+</div><div class='line'><span class="c1"># If over, use the lower boundary (lower..mid) for a recursive check,</span>
+</div><div class='line'><span class="c1"># otherwise use upper boundary (mid..upper)</span>
+</div><div class='line'><span class="k">def</span> <span class="nf">check_boundary</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span>
+</div><div class='line'>  <span class="c1"># determine middle value</span>
+</div><div class='line'>  <span class="n">mid</span> <span class="o">=</span> <span class="n">lower</span> <span class="o">+</span> <span class="p">((</span><span class="n">upper</span><span class="o">-</span><span class="n">lower</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</div><div class='line'>  <span class="c1"># Exit recursion if we&#39;ve found the value</span>
+</div><div class='line'>  <span class="kp">throw</span><span class="p">(</span><span class="ss">:found_value</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">upper</span><span class="o">-</span><span class="n">lower</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># only increment iter count if we&#39;re checking the length</span>
+</div><div class='line'>  <span class="vi">@count</span> <span class="o">+=</span> <span class="mi">1</span>
+</div><div class='line'>  <span class="c1"># Get the line length for the variable number of elements</span>
+</div><div class='line'>  <span class="n">len</span> <span class="o">=</span> <span class="vi">@k_len</span> <span class="o">+</span> <span class="p">(</span><span class="vi">@ip_len</span><span class="o">*</span><span class="n">mid</span><span class="p">)</span> <span class="o">+</span> <span class="n">mid</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Perform the test</span>
+</div><div class='line'>  <span class="k">if</span> <span class="n">len</span> <span class="o">&gt;</span> <span class="vi">@max_line_len</span>
+</div><div class='line'>    <span class="n">puts_stats</span> <span class="n">lower</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="ss">:over</span>
+</div><div class='line'>    <span class="c1"># use the lower boundary</span>
+</div><div class='line'>    <span class="n">check_boundary</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+</div><div class='line'>  <span class="k">else</span>
+</div><div class='line'>    <span class="n">puts_stats</span> <span class="n">lower</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="ss">:under</span>
+</div><div class='line'>    <span class="c1"># use the upper boundary</span>
+</div><div class='line'>    <span class="n">check_boundary</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Log method for values in a given test</span>
+</div><div class='line'><span class="k">def</span> <span class="nf">puts_stats</span> <span class="n">lower</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">over_under</span>
+</div><div class='line'>  <span class="nb">puts</span> <span class="s1">&#39;%10d | %10d | %10d | %10d | %10s&#39;</span> <span class="o">%</span> <span class="o">[</span><span class="n">lower</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">over_under</span><span class="o">]</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Specify some information for readability</span>
+</div><div class='line'><span class="nb">puts</span> <span class="s1">&#39;Determining how many ip elements can sit on a line with a max length of %d&#39;</span> <span class="o">%</span> <span class="vi">@max_line_len</span>
+</div><div class='line'><span class="nb">puts</span>
+</div><div class='line'><span class="n">legend</span> <span class="o">=</span> <span class="s1">&#39;%10s | %10s | %10s | %10s | %10s&#39;</span> <span class="o">%</span> <span class="sx">%w(lower mid/test upper len over/under)</span>
+</div><div class='line'><span class="nb">puts</span> <span class="n">legend</span>
+</div><div class='line'><span class="nb">puts</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="n">legend</span><span class="o">.</span><span class="n">size</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Run the recursive boundary checking</span>
+</div><div class='line'><span class="n">golden_ticket</span> <span class="o">=</span> <span class="kp">catch</span><span class="p">(</span><span class="ss">:found_value</span><span class="p">)</span> <span class="k">do</span>
+</div><div class='line'>  <span class="n">check_boundary</span><span class="p">(</span><span class="vi">@range</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="vi">@range</span><span class="o">.</span><span class="n">last</span><span class="p">)</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Output results</span>
+</div><div class='line'><span class="nb">puts</span>
+</div><div class='line'><span class="nb">puts</span> <span class="s1">&#39;Golden Ticket (under) = %s&#39;</span> <span class="o">%</span> <span class="n">golden_ticket</span><span class="o">.</span><span class="n">to_s</span>
+</div><div class='line'><span class="n">possible_iterations</span> <span class="o">=</span> <span class="vi">@range</span><span class="o">.</span><span class="n">last</span><span class="o">-</span><span class="vi">@range</span><span class="o">.</span><span class="n">first</span>
+</div><div class='line'><span class="n">efficiency</span> <span class="o">=</span> <span class="vi">@count</span><span class="o">.</span><span class="n">to_f</span> <span class="o">/</span> <span class="n">possible_iterations</span><span class="o">.</span><span class="n">to_f</span>
+</div><div class='line'><span class="nb">puts</span> <span class="s1">&#39;%d iterations for %d possible iterations (%f efficiency)&#39;</span> <span class="o">%</span> <span class="o">[</span><span class="vi">@count</span><span class="p">,</span> <span class="n">possible_iterations</span><span class="p">,</span> <span class="n">efficiency</span><span class="o">]</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Running the above script will produce the following output:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'><span class="n">Determining</span> <span class="n">how</span> <span class="n">many</span> <span class="n">ip</span> <span class="n">elements</span> <span class="n">can</span> <span class="n">sit</span> <span class="n">on</span> <span class="n">a</span> <span class="n">line</span> <span class="n">with</span> <span class="n">a</span> <span class="n">max</span> <span class="nb">length</span> <span class="n">of</span> <span class="mi">1000</span>
+</div><div class='line'>
+</div><div class='line'>     <span class="n">lower</span> <span class="o">|</span>   <span class="n">mid</span><span class="sr">/test |      upper |        len | over/</span><span class="n">under</span>
+</div><div class='line'><span class="o">--------------------------------------------------------------</span>
+</div><div class='line'>         <span class="mi">1</span> <span class="o">|</span>         <span class="mi">50</span> <span class="o">|</span>        <span class="mi">100</span> <span class="o">|</span>        <span class="mi">840</span> <span class="o">|</span>      <span class="n">under</span>
+</div><div class='line'>        <span class="mi">50</span> <span class="o">|</span>         <span class="mi">75</span> <span class="o">|</span>        <span class="mi">100</span> <span class="o">|</span>       <span class="mi">1240</span> <span class="o">|</span>       <span class="n">over</span>
+</div><div class='line'>        <span class="mi">50</span> <span class="o">|</span>         <span class="mi">62</span> <span class="o">|</span>         <span class="mi">75</span> <span class="o">|</span>       <span class="mi">1032</span> <span class="o">|</span>       <span class="n">over</span>
+</div><div class='line'>        <span class="mi">50</span> <span class="o">|</span>         <span class="mi">56</span> <span class="o">|</span>         <span class="mi">62</span> <span class="o">|</span>        <span class="mi">936</span> <span class="o">|</span>      <span class="n">under</span>
+</div><div class='line'>        <span class="mi">56</span> <span class="o">|</span>         <span class="mi">59</span> <span class="o">|</span>         <span class="mi">62</span> <span class="o">|</span>        <span class="mi">984</span> <span class="o">|</span>      <span class="n">under</span>
+</div><div class='line'>        <span class="mi">59</span> <span class="o">|</span>         <span class="mi">60</span> <span class="o">|</span>         <span class="mi">62</span> <span class="o">|</span>       <span class="mi">1000</span> <span class="o">|</span>      <span class="n">under</span>
+</div><div class='line'>        <span class="mi">60</span> <span class="o">|</span>         <span class="mi">61</span> <span class="o">|</span>         <span class="mi">62</span> <span class="o">|</span>       <span class="mi">1016</span> <span class="o">|</span>       <span class="n">over</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">Golden</span> <span class="n">Ticket</span> <span class="p">(</span><span class="n">under</span><span class="p">)</span> <span class="o">=</span> <span class="mi">60</span>
+</div><div class='line'><span class="mi">8</span> <span class="n">iterations</span> <span class="k">for</span> <span class="mi">99</span> <span class="n">possible</span> <span class="n">iterations</span> <span class="p">(</span><span class="mf">0.080808</span> <span class="n">efficiency</span><span class="p">)</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I&#8217;m not really sure if the efficiency part makes sense, but you get a sense that it&#8217;s a LOT faster, not only because we&#8217;re calculating the line length per test, but also because we&#8217;re recursing a fraction of calls that the brute force method performs. It&#8217;s also fun to inflate/deflate the max line len or the starting range values to see how it affects the number of recursions needed to find the number. For instance, set the max line len to 100000 and see how many extra calls have to be made. Also, what happens if your range isn&#8217;t big enough? What if the range is off (e.g. 75..100)?</p>
+
+<p>Algorithms are nifty.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">BJ Neilsen</span></span>
+
+      
+
+
+
+
+<time datetime="2011-07-01 10:25:38 -0600" pubdate  updated >Jul 1<span>st</span>, 2011</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/tags/algorithms/'>algorithms</a>, <a class='category' href='/blog/tags/binary-search/'>binary search</a>, <a class='category' href='/blog/tags/funstuff/'>funstuff</a>, <a class='category' href='/blog/tags/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://rand9.com/blog/picking-the-right-number-as-quickly-as-possible" data-via="localshred" data-counturl="http://rand9.com/blog/picking-the-right-number-as-quickly-as-possible" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+    
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'rand9';
+  var disqus_identifier = 'http://rand9.com/blog/picking-the-right-number-as-quickly-as-possible';
+  var disqus_url = 'http://rand9.com/blog/picking-the-right-number-as-quickly-as-possible';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside role=sidebar>
+  
+    <section>
+  <h1>About rand9</h1>
+  
+  <p><img src="http://www.gravatar.com/avatar/c8ef74aab2e973ba0f7da5557e0ba9a9?s=128&amp;d=identicon&amp;r=PG" width="" height="" alt="BJ Neilsen" title="BJ Neilsen"></p>
+
+  <p>rand9 is the outpouring of though from <a href="http://twitter.com/#!/localshred" title="@localshred">@localshred</a>; Father of two, developer, lead software architect <a href="http://twitter.com/#!/MoneyDesktop" title="@MoneyDesktop">@MoneyDesktop</a>, soccer coach &amp; fanatic, <a href="http://twitter.com/#!/RealSaltLake" title="@RealSaltLake">@RealSaltLake</a> devotee, gardener, chicken-raiser, infrequent triathlete, climber, and all around outdoors enthusiast.</p>
+
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/picking-the-right-number-as-quickly-as-possible">Binary search in ruby, or, &#8220;Picking the right number, as quickly as possible&#8221;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/git-pre-receive-hook-for-rejecting-a-bad-gemfile">Git pre-receive hook for rejecting a bad Gemfile</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/thor-script-for-managing-a-unicorn-driven-app">Thor script for managing a Unicorn-driven app</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/mapping-object-values-with-rubys-ampersand-symbol-technique">Mapping object values with Ruby&#8217;s ampersand-symbol technique</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/areas-of-focus">Areas of Focus</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("localshred", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/localshred" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @localshred</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - BJ Neilsen -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>

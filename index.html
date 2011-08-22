@@ -1,1 +1,1521 @@
-My Octopress Page is coming soon &hellip;
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>rand9</title>
+  <meta name="author" content="BJ Neilsen">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="canonical" href="http://rand9.com/index.html"/>
+  <link href="/favicon.png" rel="shortcut icon" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/rand9-blog" rel="alternate" title="rand9" type="application/atom+xml"/>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6580389-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body  >
+  <header><hgroup>
+  <h1><a href="/">rand9</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/rand9-blog" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="site-search">
+    <input type="hidden" name="q" value="site:rand9.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/picking-the-right-number-as-quickly-as-possible">Binary Search in Ruby, or, &#8220;Picking the Right Number, as Quickly as Possible&#8221;</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-07-01 10:25:38 -0600" pubdate  updated >Jul 1<span>st</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>So you&#8217;re writing a parser in C that parses the lines of a file. The line you&#8217;re parsing is made up of a 40 character key and any number of ip addresses after, space-separated. You need to know a max line length to read (because C is mean like that), but you&#8217;re not sure how many ip&#8217;s you can fit on a line for a given key.</p>
+
+<p>Such was my case yesterday and decided to write a mini script in ruby to figure it out. My first stab was to iterate from 1 to 100 and checking the line lengths by literally building a line with x number of ip elements on the line. While the code was correct and produced the necessary information for the given inputs, it was horribly inefficient and so I decided to rewrite it to be smarter. Enter the <a href="http://en.wikipedia.org/wiki/Binary_search_algorithm" title="Binary Search Algorithm">Binary search algorithm</a>.</p>
+
+<p>Using the binary search algorithm, we take a lower and an upper bound of possible elements and try to quickly guess which number is the highest possible without exceeding the line limit. So here&#8217;s the concrete data we know. The line format (as described above) will look something like this:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'><span class="mi">86</span><span class="n">f7e437faa5a7fce15d1ddcb9eaeaea377667b8</span> <span class="mf">174.18.0.1</span> <span class="mf">174.18.0.2</span> <span class="mf">174.18.0.3</span> <span class="mf">174.18.0.4</span> <span class="mf">174.18.0.5</span> <span class="mf">174.18.0.6</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>&#8230; with theoretically unlimited ips per line. The first value is a key we&#8217;ll use to store the ips against in a lookup table, but don&#8217;t worry about that right now. The key is generated using sha1 digesting, so we know it will always be 40 characters. The max length for any given ip address is 15 assuming all 4 blocks are at least valued at 100 (e.g. 100.100.100.100). Space-separating the key and x number of ips and your line length calculation is <code>f(x) = kl + (el*x) + x</code> where <code>x</code> is line length, <code>kl</code> is key length, and <code>el</code> is element length (ip address length). In other words, if we&#8217;re testing 50 elements on the line, the line length would be <code>40 + (15*50) + 50</code> which equals <code>840</code>.</p>
+
+<p>Now that we can arbitrarily calculate the length of a line based on the number of ip elements we want to test, we can start &#8220;guessing&#8221;. This isn&#8217;t guessing at all, we just split our possible range in half and use the middle ground to test the possible length. In other words, if my initial range is 1..100 (read as &#8220;anywhere from 1 ip element to 100 ip elements&#8221;), then our first test value for <code>x</code> above would be 50, which if you remember produces a line length of 840. I assumed that I&#8217;d be okay with a max line length of 1000 characters, and so we assert that if <code>len</code> is less than the max, then we can use the upper half of the range boundary, or <code>50..100</code>. If <code>len</code> was more than our max of 1000, we&#8217;d take the bottom half, or <code>1..50</code>.</p>
+
+<p>Using this technique recursively we can whittle down to the exact number of ip elements that can be inserted on a line before we go over the limit of 1000 characters on the line, which happens to be 60. You know you&#8217;re done checking when your range is only one element apart, in this case 60..61. With my first solution to iterate up from 1 to 100, this meant we had to check 61 times before we knew we were over the limit. <strong>With this new range, we actually only needed 8 iterations!</strong> Very cool how &#8220;guessing&#8221; can solve the problem quite nicely.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+<span class='line'>43</span>
+<span class='line'>44</span>
+<span class='line'>45</span>
+<span class='line'>46</span>
+<span class='line'>47</span>
+<span class='line'>48</span>
+<span class='line'>49</span>
+<span class='line'>50</span>
+<span class='line'>51</span>
+<span class='line'>52</span>
+<span class='line'>53</span>
+<span class='line'>54</span>
+<span class='line'>55</span>
+<span class='line'>56</span>
+<span class='line'>57</span>
+<span class='line'>58</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="nb">require</span> <span class="s1">&#39;digest/sha1&#39;</span>
+</div><div class='line'>
+</div><div class='line'><span class="vi">@k_len</span> <span class="o">=</span> <span class="no">Digest</span><span class="o">::</span><span class="no">SHA1</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>     <span class="c1"># 40</span>
+</div><div class='line'><span class="vi">@ip_len</span> <span class="o">=</span> <span class="s2">&quot;255.255.255.255&quot;</span><span class="o">.</span><span class="n">size</span>              <span class="c1"># 15</span>
+</div><div class='line'><span class="vi">@range</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">100</span>                               <span class="c1"># starting range</span>
+</div><div class='line'><span class="vi">@max_line_len</span> <span class="o">=</span> <span class="mi">1000</span>                          <span class="c1"># length to check against</span>
+</div><div class='line'><span class="vi">@count</span> <span class="o">=</span> <span class="mi">0</span>                                    <span class="c1"># iteration counter</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Given a upper and lower boundary, determine if its</span>
+</div><div class='line'><span class="c1"># middle value is over or under the given line length</span>
+</div><div class='line'><span class="c1"># If over, use the lower boundary (lower..mid) for a recursive check,</span>
+</div><div class='line'><span class="c1"># otherwise use upper boundary (mid..upper)</span>
+</div><div class='line'><span class="k">def</span> <span class="nf">check_boundary</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span>
+</div><div class='line'>  <span class="c1"># determine middle value</span>
+</div><div class='line'>  <span class="n">mid</span> <span class="o">=</span> <span class="n">lower</span> <span class="o">+</span> <span class="p">((</span><span class="n">upper</span><span class="o">-</span><span class="n">lower</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</div><div class='line'>  <span class="c1"># Exit recursion if we&#39;ve found the value</span>
+</div><div class='line'>  <span class="kp">throw</span><span class="p">(</span><span class="ss">:found_value</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">upper</span><span class="o">-</span><span class="n">lower</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># only increment iter count if we&#39;re checking the length</span>
+</div><div class='line'>  <span class="vi">@count</span> <span class="o">+=</span> <span class="mi">1</span>
+</div><div class='line'>  <span class="c1"># Get the line length for the variable number of elements</span>
+</div><div class='line'>  <span class="n">len</span> <span class="o">=</span> <span class="vi">@k_len</span> <span class="o">+</span> <span class="p">(</span><span class="vi">@ip_len</span><span class="o">*</span><span class="n">mid</span><span class="p">)</span> <span class="o">+</span> <span class="n">mid</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Perform the test</span>
+</div><div class='line'>  <span class="k">if</span> <span class="n">len</span> <span class="o">&gt;</span> <span class="vi">@max_line_len</span>
+</div><div class='line'>    <span class="n">puts_stats</span> <span class="n">lower</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="ss">:over</span>
+</div><div class='line'>    <span class="c1"># use the lower boundary</span>
+</div><div class='line'>    <span class="n">check_boundary</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+</div><div class='line'>  <span class="k">else</span>
+</div><div class='line'>    <span class="n">puts_stats</span> <span class="n">lower</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="ss">:under</span>
+</div><div class='line'>    <span class="c1"># use the upper boundary</span>
+</div><div class='line'>    <span class="n">check_boundary</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Log method for values in a given test</span>
+</div><div class='line'><span class="k">def</span> <span class="nf">puts_stats</span> <span class="n">lower</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">over_under</span>
+</div><div class='line'>  <span class="nb">puts</span> <span class="s1">&#39;%10d | %10d | %10d | %10d | %10s&#39;</span> <span class="o">%</span> <span class="o">[</span><span class="n">lower</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">over_under</span><span class="o">]</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Specify some information for readability</span>
+</div><div class='line'><span class="nb">puts</span> <span class="s1">&#39;Determining how many ip elements can sit on a line with a max length of %d&#39;</span> <span class="o">%</span> <span class="vi">@max_line_len</span>
+</div><div class='line'><span class="nb">puts</span>
+</div><div class='line'><span class="n">legend</span> <span class="o">=</span> <span class="s1">&#39;%10s | %10s | %10s | %10s | %10s&#39;</span> <span class="o">%</span> <span class="sx">%w(lower mid/test upper len over/under)</span>
+</div><div class='line'><span class="nb">puts</span> <span class="n">legend</span>
+</div><div class='line'><span class="nb">puts</span> <span class="s1">&#39;-&#39;</span><span class="o">*</span><span class="n">legend</span><span class="o">.</span><span class="n">size</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Run the recursive boundary checking</span>
+</div><div class='line'><span class="n">golden_ticket</span> <span class="o">=</span> <span class="kp">catch</span><span class="p">(</span><span class="ss">:found_value</span><span class="p">)</span> <span class="k">do</span>
+</div><div class='line'>  <span class="n">check_boundary</span><span class="p">(</span><span class="vi">@range</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="vi">@range</span><span class="o">.</span><span class="n">last</span><span class="p">)</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Output results</span>
+</div><div class='line'><span class="nb">puts</span>
+</div><div class='line'><span class="nb">puts</span> <span class="s1">&#39;Golden Ticket (under) = %s&#39;</span> <span class="o">%</span> <span class="n">golden_ticket</span><span class="o">.</span><span class="n">to_s</span>
+</div><div class='line'><span class="n">possible_iterations</span> <span class="o">=</span> <span class="vi">@range</span><span class="o">.</span><span class="n">last</span><span class="o">-</span><span class="vi">@range</span><span class="o">.</span><span class="n">first</span>
+</div><div class='line'><span class="n">efficiency</span> <span class="o">=</span> <span class="vi">@count</span><span class="o">.</span><span class="n">to_f</span> <span class="o">/</span> <span class="n">possible_iterations</span><span class="o">.</span><span class="n">to_f</span>
+</div><div class='line'><span class="nb">puts</span> <span class="s1">&#39;%d iterations for %d possible iterations (%f efficiency)&#39;</span> <span class="o">%</span> <span class="o">[</span><span class="vi">@count</span><span class="p">,</span> <span class="n">possible_iterations</span><span class="p">,</span> <span class="n">efficiency</span><span class="o">]</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Running the above script will produce the following output:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'><span class="n">Determining</span> <span class="n">how</span> <span class="n">many</span> <span class="n">ip</span> <span class="n">elements</span> <span class="n">can</span> <span class="n">sit</span> <span class="n">on</span> <span class="n">a</span> <span class="n">line</span> <span class="n">with</span> <span class="n">a</span> <span class="n">max</span> <span class="nb">length</span> <span class="n">of</span> <span class="mi">1000</span>
+</div><div class='line'>
+</div><div class='line'>     <span class="n">lower</span> <span class="o">|</span>   <span class="n">mid</span><span class="sr">/test |      upper |        len | over/</span><span class="n">under</span>
+</div><div class='line'><span class="o">--------------------------------------------------------------</span>
+</div><div class='line'>         <span class="mi">1</span> <span class="o">|</span>         <span class="mi">50</span> <span class="o">|</span>        <span class="mi">100</span> <span class="o">|</span>        <span class="mi">840</span> <span class="o">|</span>      <span class="n">under</span>
+</div><div class='line'>        <span class="mi">50</span> <span class="o">|</span>         <span class="mi">75</span> <span class="o">|</span>        <span class="mi">100</span> <span class="o">|</span>       <span class="mi">1240</span> <span class="o">|</span>       <span class="n">over</span>
+</div><div class='line'>        <span class="mi">50</span> <span class="o">|</span>         <span class="mi">62</span> <span class="o">|</span>         <span class="mi">75</span> <span class="o">|</span>       <span class="mi">1032</span> <span class="o">|</span>       <span class="n">over</span>
+</div><div class='line'>        <span class="mi">50</span> <span class="o">|</span>         <span class="mi">56</span> <span class="o">|</span>         <span class="mi">62</span> <span class="o">|</span>        <span class="mi">936</span> <span class="o">|</span>      <span class="n">under</span>
+</div><div class='line'>        <span class="mi">56</span> <span class="o">|</span>         <span class="mi">59</span> <span class="o">|</span>         <span class="mi">62</span> <span class="o">|</span>        <span class="mi">984</span> <span class="o">|</span>      <span class="n">under</span>
+</div><div class='line'>        <span class="mi">59</span> <span class="o">|</span>         <span class="mi">60</span> <span class="o">|</span>         <span class="mi">62</span> <span class="o">|</span>       <span class="mi">1000</span> <span class="o">|</span>      <span class="n">under</span>
+</div><div class='line'>        <span class="mi">60</span> <span class="o">|</span>         <span class="mi">61</span> <span class="o">|</span>         <span class="mi">62</span> <span class="o">|</span>       <span class="mi">1016</span> <span class="o">|</span>       <span class="n">over</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">Golden</span> <span class="n">Ticket</span> <span class="p">(</span><span class="n">under</span><span class="p">)</span> <span class="o">=</span> <span class="mi">60</span>
+</div><div class='line'><span class="mi">8</span> <span class="n">iterations</span> <span class="k">for</span> <span class="mi">99</span> <span class="n">possible</span> <span class="n">iterations</span> <span class="p">(</span><span class="mf">0.080808</span> <span class="n">efficiency</span><span class="p">)</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I&#8217;m not really sure if the efficiency part makes sense, but you get a sense that it&#8217;s a LOT faster, not only because we&#8217;re calculating the line length per test, but also because we&#8217;re recursing a fraction of calls that the brute force method performs. It&#8217;s also fun to inflate/deflate the max line len or the starting range values to see how it affects the number of recursions needed to find the number. For instance, set the max line len to 100000 and see how many extra calls have to be made. Also, what happens if your range isn&#8217;t big enough? What if the range is off (e.g. 75..100)?</p>
+
+<p>Algorithms are nifty.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/picking-the-right-number-as-quickly-as-possible">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/git-pre-receive-hook-for-rejecting-a-bad-gemfile">Git Pre-receive Hook for Rejecting a Bad Gemfile</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-07-01 09:16:46 -0600" pubdate  updated >Jul 1<span>st</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://gembundler.com" title="Bundler">Bundler</a> has a cool facility with <code>Gemfile</code>s that allow you to specify some fine-grained options for a given gem beyond specifying a version. Things like <code>:path</code>, <code>:branch</code>, <code>:git</code>, and <code>:tag</code>. All of those things are neat for development, but horrible for production. I wanted a way to reject pushes to a repo if the Gemfile was changed to include any one of those options, and a git pre-receive hook was just the tonic.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+<span class='line'>43</span>
+<span class='line'>44</span>
+<span class='line'>45</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="c1">#!/usr/bin/env ruby</span>
+</div><div class='line'>
+</div><div class='line'><span class="no">BRANCHES</span> <span class="o">=</span> <span class="sx">%w( master stable )</span>
+</div><div class='line'><span class="no">REJECT_OPTIONS</span> <span class="o">=</span> <span class="sx">%w( git tag branch path )</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">old_sha</span><span class="p">,</span> <span class="n">new_sha</span><span class="p">,</span> <span class="n">ref</span> <span class="o">=</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+</div><div class='line'><span class="nb">exit</span> <span class="mi">0</span> <span class="k">unless</span> <span class="no">BRANCHES</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">)</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">diff</span> <span class="o">=</span> <span class="sx">%x{ git diff-index --cached --name-only </span><span class="si">#{</span><span class="n">old_sha</span><span class="si">}</span><span class="sx"> 2&gt; /dev/null }</span>
+</div><div class='line'><span class="k">if</span> <span class="n">diff</span><span class="o">.</span><span class="n">is_a?</span><span class="p">(</span><span class="nb">String</span><span class="p">)</span>
+</div><div class='line'>  <span class="n">diff</span> <span class="o">=</span> <span class="n">diff</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">if</span> <span class="n">diff</span><span class="o">.</span><span class="n">detect</span><span class="p">{</span><span class="o">|</span><span class="n">file</span><span class="o">|</span> <span class="n">file</span> <span class="o">=~</span> <span class="sr">/^Gemfile$/</span><span class="p">}</span>
+</div><div class='line'>  <span class="n">tree</span> <span class="o">=</span> <span class="sx">%x{ git ls-tree --full-name </span><span class="si">#{</span><span class="n">new_sha</span><span class="si">}</span><span class="sx"> Gemfile 2&gt; /dev/null }</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+</div><div class='line'>  <span class="n">contents</span> <span class="o">=</span> <span class="sx">%x{ git cat-file blob </span><span class="si">#{</span><span class="n">tree</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="si">}</span><span class="sx"> 2&gt; /dev/null }</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="n">invalid_lines</span> <span class="o">=</span> <span class="n">contents</span><span class="o">.</span><span class="n">each_line</span><span class="o">.</span><span class="n">select</span> <span class="k">do</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span>
+</div><div class='line'>    <span class="n">line</span> <span class="o">=~</span> <span class="sr">/\b(</span><span class="si">#{</span><span class="no">REJECT_OPTIONS</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="p">)</span><span class="si">}</span><span class="sr">)\b/</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">unless</span> <span class="n">invalid_lines</span><span class="o">.</span><span class="n">empty?</span>
+</div><div class='line'>    <span class="nb">puts</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;&gt; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!&#39;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;&gt; ---- PUSH REJECTED by origin ----&#39;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;&gt;&#39;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&gt; You&#39;ve specified an invalid option for </span><span class="si">#{</span><span class="n">invalid_lines</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2"> gem definitions in the Gemfile&quot;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&gt; Invalid options are: </span><span class="si">#{</span><span class="no">REJECT_OPTIONS</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;&gt;&#39;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&gt; The offending gems:&quot;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&gt;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">invalid_lines</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;&gt;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;&gt;&#39;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;&gt; To fix:&#39;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&gt;</span><span class="se">\t</span><span class="s2">* Remove the offending options&quot;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&gt;</span><span class="se">\t</span><span class="s2">* bundle install&quot;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&gt;</span><span class="se">\t</span><span class="s2">* Run tests&quot;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&gt;</span><span class="se">\t</span><span class="s2">* Ammend previous commit (git add . &amp;&amp; git commit --amend)&quot;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;&gt;</span><span class="se">\t</span><span class="s2">* git push origin </span><span class="si">#{</span><span class="n">ref</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;&gt;&#39;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;&gt; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!&#39;</span>
+</div><div class='line'>    <span class="nb">puts</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="nb">exit</span> <span class="mi">1</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>The script above monitors pushes to the &#8220;master&#8221; and &#8220;stable&#8221; branches (our development and production lines, respectively). It checks to see if the Gemfile was listed in the new commit file list, then parses the blob of the Gemfile for any of the offending options. Each offending line is then output back to the pushing developer with instructions on how to fix his/her Gemfile and how to amend the commit. Here&#8217;s what the output looks like:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'><span class="nv">$</span> <span class="nv">git</span> <span class="nb">push</span> <span class="n">origin</span> <span class="n">master</span>
+</div><div class='line'>  <span class="n">Counting</span> <span class="n">objects:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+</div><div class='line'>  <span class="n">Delta</span> <span class="n">compression</span> <span class="n">using</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">8</span> <span class="n">threads</span><span class="o">.</span>
+</div><div class='line'>  <span class="n">Compressing</span> <span class="n">objects:</span> <span class="mi">100</span><span class="nv">%</span> <span class="err">(</span><span class="nv">3</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+</div><div class='line'>  <span class="n">Writing</span> <span class="n">objects:</span> <span class="mi">100</span><span class="nv">%</span> <span class="err">(</span><span class="nv">3</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span> <span class="mi">362</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">done</span><span class="o">.</span>
+</div><div class='line'>  <span class="n">Total</span> <span class="mi">3</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">),</span> <span class="n">reused</span> <span class="mi">0</span> <span class="p">(</span><span class="n">delta</span> <span class="mi">0</span><span class="p">)</span>
+</div><div class='line'>  <span class="n">Unpacking</span> <span class="n">objects:</span> <span class="mi">100</span><span class="nv">%</span> <span class="err">(</span><span class="nv">3</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span> <span class="n">done</span><span class="o">.</span>
+</div><div class='line'>  <span class="n">remote:</span>
+</div><div class='line'>  <span class="n">remote:</span> <span class="o">&gt;</span> <span class="o">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+</div><div class='line'>  <span class="n">remote:</span> <span class="o">&gt;</span> <span class="o">----</span> <span class="n">PUSH</span> <span class="n">REJECTED</span> <span class="n">by</span> <span class="n">origin</span> <span class="o">----</span>
+</div><div class='line'>  <span class="n">remote:</span> <span class="o">&gt;</span>
+</div><div class='line'>  <span class="n">remote:</span> <span class="o">&gt;</span> <span class="n">You</span><span class="s">&#39;ve specified an invalid option for 2 gem definitions in the Gemfile</span>
+</div><div class='line'><span class="s">  remote: &gt; Invalid options are: git, tag, branch, path</span>
+</div><div class='line'><span class="s">  remote: &gt;</span>
+</div><div class='line'><span class="s">  remote: &gt; The offending gems:</span>
+</div><div class='line'><span class="s">  remote: &gt; gem &#39;</span><span class="n">utilio</span><span class="s">&#39;, :git =&gt; &#39;</span><span class="n">git</span><span class="nv">@github</span><span class="o">.</span><span class="n">com:localshred</span><span class="o">/</span><span class="n">utilio</span><span class="o">.</span><span class="n">git</span><span class="s">&#39;</span>
+</div><div class='line'><span class="s">  remote: &gt; gem &#39;</span><span class="n">rails</span><span class="s">&#39;, :git =&gt; &#39;</span><span class="n">git</span><span class="nv">@github</span><span class="o">.</span><span class="n">com:rails</span><span class="o">/</span><span class="n">rails</span><span class="o">.</span><span class="n">git</span><span class="s">&#39;</span>
+</div><div class='line'><span class="s">  remote: &gt;</span>
+</div><div class='line'><span class="s">  remote: &gt; To fix:</span>
+</div><div class='line'><span class="s">  remote: &gt; * Remove the offending options</span>
+</div><div class='line'><span class="s">  remote: &gt; * bundle install</span>
+</div><div class='line'><span class="s">  remote: &gt; * Run tests</span>
+</div><div class='line'><span class="s">  remote: &gt; * Ammend previous commit (git add . &amp;&amp; git commit --amend)</span>
+</div><div class='line'><span class="s">  remote: &gt; * git push origin master</span>
+</div><div class='line'><span class="s">  remote: &gt;</span>
+</div><div class='line'><span class="s">  remote: &gt; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+</div><div class='line'><span class="s">  remote: </span>
+</div><div class='line'><span class="s">  To git@git.mycompany.com:repo1.git</span>
+</div><div class='line'><span class="s">   ! [remote rejected] master -&gt; master (pre-receive hook declined)</span>
+</div><div class='line'><span class="s">  error: failed to push some refs to &#39;</span><span class="n">git</span><span class="nv">@git</span><span class="o">.</span><span class="n">mycompany</span><span class="o">.</span><span class="n">com:repo1</span><span class="o">.</span><span class="n">git</span><span class="err">&#39;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>It&#8217;s also worth noting that since this is a pre-receive hook, when returning an exit status of anything but 0, git will reject merging the commits. This is good because we don&#8217;t want &#8220;bad code&#8221; in our repo. You could also use this to do other checking measures, such as running a CI build or syntax checks.</p>
+
+<p>To use the above hook, simply copy the script above into the <code>./hooks/pre-receive</code> file in your origin repo. Be sure to <code>chmod +x ./hooks/pre-receive</code> otherwise git won&#8217;t be able to invoke the script when a new push occurs. We have ~15 repos that I manage at work that I want to use the hook on, so I just kept the file out on the git user&#8217;s home directory and symlinked it back to each repos hooks directory. Same results, just easier to manage if I need to make a quick change to the hook.</p>
+
+<p>Happy coding.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/git-pre-receive-hook-for-rejecting-a-bad-gemfile">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/thor-script-for-managing-a-unicorn-driven-app">Thor Script for Managing a Unicorn-driven App</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-01-25 22:04:37 -0700" pubdate  updated >Jan 25<span>th</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I deployed a mini sinatra app on one of our test servers to manage some internal QA. I&#8217;ve put out quite a few apps backed by <a href="http://unicorn.bogomips.org/" title="Unicorn specification">Unicorn</a> in QA recently and finally wrote a little script to handle stopping, starting, and reloading of the unicorn processes. Nothing super special here, just thought I&#8217;d share a useful script. Drop the following code into your application&#8217;s <code>tasks</code> directory, or place it on the app root and call it <code>Thorfile</code>.</p>
+
+<h3>tasks/unicorn.thor (or Thorfile)</h3>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="c1"># put me in /path/to/app/tasks/unicorn.thor</span>
+</div><div class='line'><span class="nb">require</span> <span class="s1">&#39;thor&#39;</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">class</span> <span class="nc">UnicornRunner</span> <span class="o">&lt;</span> <span class="no">Thor</span>
+</div><div class='line'>  <span class="kp">include</span> <span class="no">Thor</span><span class="o">::</span><span class="no">Group</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="n">namespace</span> <span class="ss">:unicorn</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="no">UNICORN_CONFIG</span> <span class="o">=</span> <span class="s2">&quot;/path/to/app/config/unicorn.rb&quot;</span>
+</div><div class='line'>  <span class="no">RACKUP_FILE</span> <span class="o">=</span> <span class="s2">&quot;/path/to/app/config.ru&quot;</span>
+</div><div class='line'>  <span class="no">PID_FILE</span> <span class="o">=</span> <span class="s2">&quot;/path/to/app/tmp/application.pid&quot;</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="n">desc</span> <span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="s1">&#39;Start the application&#39;</span>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">start</span>
+</div><div class='line'>    <span class="n">say</span> <span class="s1">&#39;Starting the application...&#39;</span><span class="p">,</span> <span class="ss">:yellow</span>
+</div><div class='line'>    <span class="sb">`bundle exec unicorn -c </span><span class="si">#{</span><span class="no">UNICORN_CONFIG</span><span class="si">}</span><span class="sb"> -E production -D </span><span class="si">#{</span><span class="no">RACKUP_FILE</span><span class="si">}</span><span class="sb">`</span>
+</div><div class='line'>    <span class="n">say</span> <span class="s1">&#39;Done&#39;</span><span class="p">,</span> <span class="ss">:green</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="n">desc</span> <span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;Stop the application&#39;</span>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">stop</span>
+</div><div class='line'>    <span class="n">say</span> <span class="s1">&#39;Stopping the application...&#39;</span><span class="p">,</span> <span class="ss">:yellow</span>
+</div><div class='line'>    <span class="sb">`kill -QUIT $(cat </span><span class="si">#{</span><span class="no">PID_FILE</span><span class="si">}</span><span class="sb">)`</span>
+</div><div class='line'>    <span class="n">say</span> <span class="s1">&#39;Done&#39;</span><span class="p">,</span> <span class="ss">:green</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="n">desc</span> <span class="s1">&#39;reload&#39;</span><span class="p">,</span> <span class="s1">&#39;Reload the application&#39;</span>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">reload</span>
+</div><div class='line'>    <span class="n">say</span> <span class="s1">&#39;Reloading the application...&#39;</span><span class="p">,</span> <span class="ss">:yellow</span>
+</div><div class='line'>    <span class="sb">`kill -USR2 $(cat </span><span class="si">#{</span><span class="no">PID_FILE</span><span class="si">}</span><span class="sb">)`</span>
+</div><div class='line'>    <span class="n">say</span> <span class="s1">&#39;done&#39;</span><span class="p">,</span> <span class="ss">:green</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<h3>Usage</h3>
+
+<p>From your application root directory, run any of the three commands. Keep in mind you&#8217;ll need a unicorn config file that actually dictates how <a href="http://unicorn.bogomips.org/" title="Unicorn specification">Unicorn</a> should behave (like number of workers, where your logs go, etc). You&#8217;ll also need a <a href="http://rack.rubyforge.org/doc/SPEC.html" title="Rack specification">Rackup</a> file (<code>config.ru</code>) which tells unicorn how to run your app.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'><span class="nv">$</span> <span class="nv">thor</span> <span class="o">-</span><span class="n">T</span>
+</div><div class='line'><span class="c1"># thor unicorn:start    Start the application</span>
+</div><div class='line'><span class="c1"># thor unicorn:stop     Stop the application</span>
+</div><div class='line'><span class="c1"># thor unicorn:reload   Reload the application</span>
+</div><div class='line'>
+</div><div class='line'><span class="nv">$</span> <span class="nv">thor</span> <span class="n">unicorn:start</span>    <span class="c1"># starts the unicorn master</span>
+</div><div class='line'><span class="nv">$</span> <span class="nv">thor</span> <span class="n">unicorn:stop</span>     <span class="c1"># sends the QUIT signal to master (graceful shutdown)</span>
+</div><div class='line'><span class="nv">$</span> <span class="nv">thor</span> <span class="n">unicorn:reload</span>   <span class="c1"># sends the USR2 signal to master (graceful reload of child workers)</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Plop this puppy behind <a href="http://wiki.nginx.org/Main" title="Nginx web server">nginx</a> and you&#8217;re golden. <a href="https://github.com/wycats/thor" title="Thor scripting library of Ruby">Thor</a> has a lot more things you could do with this (like overriding which config file to use) by providing method-level options, but this is a great starting point for most people. Leave a comment if you have any improvements or other ways you handle this.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/thor-script-for-managing-a-unicorn-driven-app">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/mapping-object-values-with-rubys-ampersand-symbol-technique">Mapping Object Values With Ruby&#8217;s Ampersand-symbol Technique</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-01-07 22:39:31 -0700" pubdate  updated >Jan 7<span>th</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Discovered another little Ruby nugget the other day. The nugget gives a shorter syntax when you want to map the return value of a message sent to a list of objects, say, the name of the class of the object. In the past I would use <code>Array#map</code> to produce the list with something like:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">objects</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:number_1</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="o">]</span>
+</div><div class='line'><span class="n">classes</span> <span class="o">=</span> <span class="n">objects</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">o</span><span class="o">|</span> <span class="n">o</span><span class="o">.</span><span class="n">class</span> <span class="p">}</span>
+</div><div class='line'><span class="n">classes</span><span class="o">.</span><span class="n">inspect</span>
+</div><div class='line'><span class="c1"># =&gt; [Fixnum, Symbol, String]</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Turns out that Ruby has a shortcut that shortens your keystrokes a bit:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">objects</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:number_1</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="o">]</span>
+</div><div class='line'><span class="n">classes</span> <span class="o">=</span> <span class="n">objects</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:class</span><span class="p">)</span>
+</div><div class='line'><span class="n">classes</span><span class="o">.</span><span class="n">inspect</span>
+</div><div class='line'><span class="c1"># =&gt; [Fixnum, Symbol, String]</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>The two snippets are functionally identical. By passing a symbol to map preceded by an ampersand, Ruby will call <code>Symbol#to_proc</code> on the passed symbol (e.g. <code>:class.to_proc</code>), which returns a proc object like <code>{|o| o.class }</code>. Where would you use this you ask? The day I learned this little ditty I was writing some tests that were verifying some active record associations. Whenever I needed to update values on a <code>has_many</code> collection for a particular model, I actually needed to assert that the associated collection of objects were rebuilt with the new values, deleting the old rows and recreating new ones. The ampersand-symbol technique above was nice for this.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">describe</span> <span class="no">Father</span> <span class="k">do</span>
+</div><div class='line'>  <span class="n">it</span> <span class="s1">&#39;should create new children when I attempt to update the children&#39;</span> <span class="k">do</span>
+</div><div class='line'>    <span class="n">father</span> <span class="o">=</span> <span class="no">Factory</span><span class="p">(</span><span class="ss">:father</span><span class="p">)</span>
+</div><div class='line'>    <span class="n">orig_children</span> <span class="o">=</span> <span class="n">father</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:id</span><span class="p">)</span>
+</div><div class='line'>    <span class="c1"># perform the update method</span>
+</div><div class='line'>    <span class="n">father</span><span class="o">.</span><span class="n">reload</span>
+</div><div class='line'>    <span class="n">father</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:id</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span> <span class="o">==</span> <span class="n">orig_children</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So I thought I&#8217;d pass the word on. <strong>Cool stuff in Ruby.</strong> Who knew?</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/mapping-object-values-with-rubys-ampersand-symbol-technique">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/areas-of-focus">Areas of Focus</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2011-01-02 00:18:33 -0700" pubdate  updated >Jan 2<span>nd</span>, 2011</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In 2009 I created a website to keep track of the <a href="http://www.onesimplegoal.com" title="One Simple Goal">simple goals</a> in my life. It was a new way to set goals for me: set one simple goal each day. <a href="http://www.onesimplegoal.com" title="One Simple Goal">One Simple Goal</a> was born out of a few days of work, because the concept is simple, and as you all know, <a href="http://www.rand9.com/blog/why_i_went_minimal" title="Why I went minimal">I like simplicity</a>. It helps me focus on what matters most, while assisting me in <a href="http://bjneilsen.wordpress.com/2009/04/20/purge-and-simplify/" title="Purge and Simplify">ignoring what doesn&#8217;t</a>.</p>
+
+<p>In the lead-up to 2011, I&#8217;ve been quietly thinking about what types of resolutions I will make, if any. Typically in the past I&#8217;ve shied away from making grandiose resolutions, usually just picking certain directions I&#8217;d like my life to flow, and then storing them as high-level ideals about my life. This year will be different.</p>
+
+<p>Not different in that I&#8217;ll be buying that gym pass or whatever cliche&#8217;s abound when talking about resolutions. No, I am fairly certain I won&#8217;t be doing that kind of generalized stuff any time soon. Different because I&#8217;ll be more concrete about two things: 1) Focus, and 2) Timeframe. Humans generally love to set goals, and almost always find a way to not achieve them. I&#8217;m no different. But when I realized that I still wanted the results of those goals, I stumbled on the idea of making a simple goal every day. No long to-do lists, no lofty &#8220;Mount Everest&#8221; goals. Simple things, <a href="http://onesimplegoal.com/localshred">like</a>:</p>
+
+<ul>
+<li>Finally paint wall patches I did last August. Go me.</li>
+<li>Push out some code to OSG. Anything.</li>
+<li>Write the first of the ruby daily series</li>
+</ul>
+
+
+<p>Fast-forward to tonight when I realized that OSG is exactly how I should be determining (and implementing) my goals for 2011, with a few tweaks. The first and most noticeable tweak is the <strong>time frame</strong>. Instead of limiting my goal work to one day, it&#8217;ll be 2 to 4 weeks, with a preference to lean on a full month. The <strong>focus</strong> aspect changes slightly also, as it&#8217;s easy to set a specific focus for a given day, but more challenging to do so for a given month. I have a few ideas about how using a system like <a href="http://en.wikipedia.org/wiki/Scrum_(development)" title="Scrum project management">Scrum</a> can help me achieve real focus with a longer time frame. Keep in mind that as with OSG, the idea is that you have something concrete that you can say: &#8220;I did (insert goal here)&#8221;. So things like &#8220;Become more good looking&#8221; don&#8217;t count because they&#8217;re arbitrary in what their completion may look like. We&#8217;re looking for concrete goals, things that (as Seth Godin says) <a href="http://sethgodin.typepad.com/seths_blog/2010/06/fear-of-shipping.html" title="Seth Godin, Fear of shipping"><strong><em>you actually ship</em></strong></a>. The concept of shipping is paramount.</p>
+
+<p>I threw a list together on <a href="http://www.springpadit.com" title="My SpringPad (localshred)">SpringPad</a> with a few ideas that I plan on thinking into a little further, but the first month is more or less solidified in my mind as to what I&#8217;ll be working on (and yes, it actually is scary to me, in a good way). The over arching focus for 2011 is to develop myself further. 2010 was a banner year for me professionally, and 2011 is poised to be the same or more. But something I felt was lacking was a commitment to be better, not for my career or job, just for me. So 2011&#8217;s list looks like that.</p>
+
+<p>One over-arching goal that falls out of this framework is that I want to get back into writing. I was <a href="http://bjneilsen.wordpress.com" title="My old blog">into blogging</a> in &#8216;07 and &#8216;08 and thoroughly enjoyed it. Not the page-views and all that garbage, just the act of writing about something. Anything. I want to enjoy it again. With all that in mind, I&#8217;ve decided that I&#8217;m going to work hard at documenting my ride through 2011 and the way I&#8217;m setting this whole thing up. Hopefully it&#8217;ll help somebody out, but mostly it&#8217;s for my own records and enjoyment.</p>
+
+<p>So here are a few rules for setting goals this year. And yes, I just made them up.</p>
+
+<ol>
+<li>Only concrete goals that can be definitively completed within a month are allowed. Can you answer &#8220;Yes&#8221; or &#8220;No&#8221; to the question: <strong><em>Did you ship it?</em></strong></li>
+<li>Do things that are worthwhile and that stretch me. No maintaining of status quo, go beyond.</li>
+<li>Planning for the month&#8217;s goals happens at the <em>beginning</em> of the month, preferably the first day of the month. Plan <em>only</em> for the current month (iteration).</li>
+<li>Retrospectives about what was or wasn&#8217;t completed happen at the <em>end</em> of the month. Honesty is key here.</li>
+<li>Blog often.</li>
+<li>Have Fun.</li>
+<li>Write more lists like <a href="http://ryanbyrd.net" title="RyanByrd.net">Ryan</a> ;).</li>
+</ol>
+
+
+<p>I&#8217;ll post more soon. <strong>In the meantime, why don&#8217;t you go <a href="http://www.onesimplegoal.com" title="One Simple Goal">set some simple goals</a>?</strong></p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/areas-of-focus">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/intersecting-arrays-in-ruby">Intersecting Arrays in Ruby</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-09-22 14:34:18 -0600" pubdate  updated >Sep 22<span>nd</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Just found a slightly satisfying approach to checking the contents of an array in ruby.</p>
+
+<p>I like using <a href="http://ruby-doc.org/core/classes/Array.html#M002203" title="Array#include?"><code>Array#include?</code></a> to figure out whether or not my given array has a certain entry. Unfortunately, if you want to check if an array has a set of possible values, such as, does it contain <code>:a</code> <em>or</em> <code>:b</code>, you can&#8217;t just pass an array of those values. Let me show you what I mean:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">food</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:bread</span><span class="p">,</span> <span class="ss">:butter</span><span class="o">]</span>
+</div><div class='line'><span class="n">food1</span> <span class="o">=</span> <span class="o">[[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:bread</span><span class="o">]</span><span class="p">,</span> <span class="ss">:butter</span><span class="o">]</span>
+</div><div class='line'><span class="n">expected</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:bread</span><span class="o">]</span>
+</div><div class='line'><span class="n">food</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="ss">:milk</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
+</div><div class='line'><span class="n">food</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span> <span class="c1"># =&gt; false</span>
+</div><div class='line'><span class="n">food1</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>In other words, <code>include?</code> is very specific about the way it does the matching. But what if I want <code>food.include?(expected)</code> to tell me if <code>food</code> has any of <code>expected</code>&#8217;s values? Enter <a href="http://ruby-doc.org/core/classes/Array.html#M002212" title="Array#&amp;"><code>Array#&amp;</code></a>. It doesn&#8217;t make <code>include?</code> do anything different, but does give us a simple way to get this newer behavior:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">food</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:bread</span><span class="p">,</span> <span class="ss">:butter</span><span class="o">]</span>
+</div><div class='line'><span class="n">expected</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:bread</span><span class="o">]</span>
+</div><div class='line'><span class="p">(</span><span class="n">food</span> <span class="o">&amp;</span> <span class="n">expected</span><span class="p">)</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="c1"># =&gt; true</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p><a href="http://ruby-doc.org/core/classes/Array.html#M002212" title="Array#&amp;"><code>Array#&amp;</code></a> gets the intersection of two arrays (the values that are present in both) and returns a new array containing only those values. You could add this to any <code>Array</code> instance by simply defining your own <code>include_any?</code> method:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="c1"># myapp/lib/ext/array.rb</span>
+</div><div class='line'><span class="k">class</span> <span class="nc">Array</span>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">include_any?</span> <span class="n">values</span>
+</div><div class='line'>    <span class="p">(</span><span class="nb">self</span> <span class="o">&amp;</span> <span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">include_all?</span> <span class="n">values</span>
+</div><div class='line'>    <span class="p">(</span><span class="nb">self</span> <span class="o">&amp;</span> <span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">values</span><span class="o">.</span><span class="n">size</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="o">[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:bread</span><span class="p">,</span> <span class="ss">:butter</span><span class="o">].</span><span class="n">include_any?</span><span class="p">(</span><span class="o">[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:butter</span><span class="o">]</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
+</div><div class='line'><span class="o">[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:bread</span><span class="p">,</span> <span class="ss">:butter</span><span class="o">].</span><span class="n">include_all?</span><span class="p">(</span><span class="o">[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:butter</span><span class="o">]</span><span class="p">)</span> <span class="c1"># =&gt; false</span>
+</div><div class='line'><span class="o">[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:bread</span><span class="p">,</span> <span class="ss">:butter</span><span class="o">].</span><span class="n">include_all?</span><span class="p">(</span><span class="o">[</span><span class="ss">:milk</span><span class="p">,</span> <span class="ss">:butter</span><span class="p">,</span> <span class="ss">:bread</span><span class="o">]</span><span class="p">)</span> <span class="c1"># =&gt; true</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I cheated and gave you an <code>include_all?</code> method also, which just ensures that all of the expected values are present.</p>
+
+<p>I could&#8217;ve used <a href="http://ruby-doc.org/core/classes/Enumerable.html#M003132" title="Enumerable#any?"><code>Enumerable#any?</code></a> but then we&#8217;d have to use a block and still use <a href="http://ruby-doc.org/core/classes/Array.html#M002203" title="Array#include?"><code>Array#include?</code></a>. This way, we&#8217;re golden.</p>
+
+<p><strong>What cool things have you done with ruby today?</strong></p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/intersecting-arrays-in-ruby">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/hooking-instance-methods-in-ruby">Hooking Instance Methods in Ruby</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-09-18 16:00:18 -0600" pubdate  updated >Sep 18<span>th</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Everyone and their dog is familiar with ActiveRecord-style callbacks, you know, the kind where you specify you want a particular method or proc to be run before or after a given event on your model. It helps you enforce the principles of code ownership while making it trivial to do the hardwiring, ensuring that code owned by the model is also managed by the model.</p>
+
+<p>I love this kind of programming and recently found that I needed some similar functionality in a particular class, one that wasn&#8217;t tied to Active<em>[Insert your railtie here]</em>. My case was different in that I knew that <em>any</em> class inheriting from a particular base, which we&#8217;ll call <code>HookBase</code>, needed a hardwired hook for every method defined, functionality that needed to run for virtually every instance method call. The following example illustrates my need:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">class</span> <span class="nc">HookBase</span>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">hardwired_hook</span>
+</div><div class='line'>    <span class="c1"># functionality every method needs</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">class</span> <span class="nc">MyClass</span> <span class="o">&lt;</span> <span class="no">HookBase</span>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">find_widget</span>
+</div><div class='line'>    <span class="c1"># needs setup/teardown help from HookBase</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>So, operating from the idea that every instance method extending classes implement should have default wrap-around behavior, I got to work. First off, you need to know that ruby has built-in lifecycle hooks on your classes, objects, and modules. Things like <code>included</code> and <code>extended</code> and <code>method_added</code> help you hook in to your code to ensure that the appropriate things are happening on your classes, objects, and modules. So in my case, I needed to know when a method was added to <code>HookBase</code> (or one of its children) so that I could appropriately tap into that code.</p>
+
+<p><code>method_added</code> is where the meat of the solution lies. When a method is added, ruby fires the method_added call on the object (if any exists), passing it the name of the new method. Keep in mind that this happens <em>after</em> the method has already been created, which is crucial to this solution. We&#8217;ll next create a new name from the old name, prepended with some identifier (in this case we chose &#8220;hide_&#8221;).</p>
+
+<p>We&#8217;ll need to check the private_instance_methods array for already defined method names to ensure we&#8217;re not duplicating our effort (or clobbering someone elses), as well as checking our own array constant for methods we don&#8217;t want to hook. Remember that method_added will be called on every method that is found for HookBase as well as children. I found that there were HookBase methods I had implemented that were supporting this behavior and didn&#8217;t need to be hardwired, so I added this to my list of methods to ignore.</p>
+
+<p>If we&#8217;ve made it this far, go ahead and alias the old method to the new one, then privatize the new one. Now we can safely redefine the old method without destroying the code it contained. We also now know that no one (except self) can invoke the private method directly, they&#8217;ll have to implicitly go through the HookBase first.</p>
+
+<p>Redefining the old method is as simple as using <code>define_method</code> and calling our hardwired_hook method within, passing our <code>new_method</code> (which is privatized), and the old method (for convenience), and any associated arguments and blocks.</p>
+
+<p>The final implementation looks something like this:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+<span class='line'>24</span>
+<span class='line'>25</span>
+<span class='line'>26</span>
+<span class='line'>27</span>
+<span class='line'>28</span>
+<span class='line'>29</span>
+<span class='line'>30</span>
+<span class='line'>31</span>
+<span class='line'>32</span>
+<span class='line'>33</span>
+<span class='line'>34</span>
+<span class='line'>35</span>
+<span class='line'>36</span>
+<span class='line'>37</span>
+<span class='line'>38</span>
+<span class='line'>39</span>
+<span class='line'>40</span>
+<span class='line'>41</span>
+<span class='line'>42</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">class</span> <span class="nc">HookBase</span>
+</div><div class='line'>  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</div><div class='line'>    <span class="no">NON_HOOK_METHODS</span> <span class="o">=</span> <span class="sx">%w( hardwired_hook some_other_method )</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="k">def</span> <span class="nf">method_added</span> <span class="n">old</span>
+</div><div class='line'>      <span class="n">new_method</span> <span class="o">=</span> <span class="ss">:&quot;hide_</span><span class="si">#{</span><span class="n">old</span><span class="si">}</span><span class="ss">&quot;</span>
+</div><div class='line'>      <span class="k">return</span> <span class="k">if</span> <span class="p">(</span><span class="nb">private_instance_methods</span> <span class="o">&amp;</span> <span class="o">[</span><span class="n">old</span><span class="p">,</span> <span class="n">new_method</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">old</span> <span class="o">=~</span> <span class="sr">/^hide_/</span> <span class="ow">or</span> <span class="no">NON_HOOK_METHODS</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="n">old</span><span class="o">.</span><span class="n">to_s</span><span class="p">)</span>
+</div><div class='line'>
+</div><div class='line'>      <span class="n">alias_method</span> <span class="n">new_method</span><span class="p">,</span> <span class="n">old</span>
+</div><div class='line'>      <span class="kp">private</span> <span class="n">new_method</span>
+</div><div class='line'>
+</div><div class='line'>      <span class="n">define_method</span> <span class="n">old</span> <span class="k">do</span> <span class="o">|*</span><span class="n">args</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="o">|</span>
+</div><div class='line'>        <span class="n">hardwired_hook</span> <span class="n">new_method</span><span class="o">.</span><span class="n">to_sym</span><span class="p">,</span> <span class="n">old</span><span class="o">.</span><span class="n">to_sym</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span>
+</div><div class='line'>      <span class="k">end</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="kp">private</span>
+</div><div class='line'>
+</div><div class='line'>  <span class="c1"># Hardwired handler for all method calls</span>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">hardwired_hook</span> <span class="n">new_method</span><span class="p">,</span> <span class="n">old_method</span><span class="p">,</span> <span class="n">args</span><span class="o">*</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span>
+</div><div class='line'>    <span class="c1"># perform any before actions</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;doing stuff before method call...&#39;</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1"># Invoke the privatized method</span>
+</div><div class='line'>    <span class="nb">__send__</span> <span class="n">new_method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span>
+</div><div class='line'>
+</div><div class='line'>    <span class="c1"># perform any after actions</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;doing stuff after the method call...&#39;</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">class</span> <span class="nc">MyClass</span> <span class="o">&lt;</span> <span class="no">HookBase</span>
+</div><div class='line'>  <span class="k">def</span> <span class="nf">find_widget</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s1">&#39;finding widget...&#39;</span>
+</div><div class='line'>  <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="no">MyClass</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">find_widget</span>
+</div><div class='line'><span class="c1"># doing any before actions</span>
+</div><div class='line'><span class="c1"># finding widget...</span>
+</div><div class='line'><span class="c1"># doing any after actions</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>The great thing about this approach is you may not even care about hardwiring anything, but just want to provide hooking functionality. If that&#8217;s the case, simply define a class method in HookBase to register a hook (such as <code>before</code> or <code>after</code>), optionally accepting an <code>:only</code> or <code>:except</code> list of methods. Internally store the blocks passed and invoke them in the <code>hardwired_hook</code> method either before or after the method call.</p>
+
+<p>Let me know if you have any comments or different approaches. Happy hacking!</p>
+
+<p><strong>UPDATE</strong>: Forgot that method_added needs to be defined in <code>class &lt;&lt; self</code> to work properly. Also updated to use the <code>Array#&amp;</code> intersection method I described in <a href="/blog/intersecting_arrays_in_ruby">Intersecting arrays in ruby</a> instead of using <code>Array#include?</code>.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/hooking-instance-methods-in-ruby">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/paper-skater">Paper Skater</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-07-01 10:39:26 -0600" pubdate  updated >Jul 1<span>st</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>How unbelievably sick is this video. I love this.</p>
+
+<object width="731" height="548"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=8461831&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=0&amp;show_portrait=0&amp;color=ff0179&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=8461831&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=0&amp;show_portrait=0&amp;color=ff0179&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="731" height="548"></embed></object>
+
+
+<p><a href="http://vimeo.com/8461831">Skateboardanimation</a> from <a href="http://vimeo.com/singer">Tilles Singer</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/paper-skater">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/variable-length-method-arguments-in-ruby">Variable-length Method Arguments in Ruby</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-06-02 23:19:11 -0600" pubdate  updated >Jun 2<span>nd</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In yesterday&#8217;s post regarding the <a href="/blog/four_things_you_should_know_about_ruby_methods" title="Four things you should know about ruby methods">four things you should know about ruby methods</a>, I covered some basics about ruby method definitions. For this post, I just wanted to go into a little more detail here with some of the things I left off the table that came to me later.</p>
+
+<h3>Variable-length arguments</h3>
+
+<p>Number three on our list of things you should know, we talked about <strong>variable-length arguments</strong>, also known as <strong>the array-collected parameter</strong>. At least, that&#8217;s what I call it&#8230; sometimes. This cool feature allows you to pass any number of arguments to a ruby method and have all the unmapped parameters get collected into a single parameter which becomes an array of the values that were passed. Whew! That was a mouthful.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">def</span> <span class="nf">log_all</span><span class="p">(</span><span class="o">*</span><span class="n">lines</span><span class="p">)</span>
+</div><div class='line'>    <span class="n">lines</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">line</span><span class="o">|</span> <span class="vi">@logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">line</span><span class="p">)}</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">log_all</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;qux&#39;</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># File: logs/your_log_file.log</span>
+</div><div class='line'><span class="c1"># foo</span>
+</div><div class='line'><span class="c1"># bar</span>
+</div><div class='line'><span class="c1"># baz</span>
+</div><div class='line'><span class="c1"># qux</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>This is neat, no doubt, but what if you don&#8217;t want to specify each value individually to the array-collected parameter in the method call? Say for instance, in the previous example, I already had the values <code>'foo'</code>, <code>'bar'</code>, <code>'baz'</code>, and <code>'qux'</code> in an array. Ruby allows you to pass the array through as a pre-collected array of values. The only thing to do is pass the array as a single parameter, prefixed by an asterisk (<code>*</code>).</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">def</span> <span class="nf">log_all</span><span class="p">(</span><span class="o">*</span><span class="n">lines</span><span class="p">)</span>
+</div><div class='line'>    <span class="n">lines</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">line</span><span class="o">|</span> <span class="vi">@logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">line</span><span class="p">)}</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># values are predefined</span>
+</div><div class='line'><span class="n">values</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;qux&#39;</span><span class="o">]</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Don&#39;t forget the asterisk!</span>
+</div><div class='line'><span class="n">log_all</span> <span class="o">*</span><span class="n">values</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>If you were to indeed forget the asterisk before the values array being passed, <code>log_all</code>&#8217;s lines parameter would still be an array, but would only contain one element: the array you passed. So in order to get to it you&#8217;d either have to flatten <code>lines</code> or call the <code>0th</code> index on it, which sort of defeats the purpose.</p>
+
+<h3>Don&#8217;t forget blocks, lambdas, and procs!</h3>
+
+<p>This array-collection technique to method parameter definition is not only confined to normal methods, but also to ruby&#8217;s trio of anonymous function definitions: blocks, lambdas, and procs. Take the same example from above, with <code>log_all</code> rewritten as a lambda.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">log_all</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|*</span><span class="n">lines</span><span class="o">|</span>
+</div><div class='line'>    <span class="n">lines</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">line</span><span class="o">|</span> <span class="vi">@logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">line</span><span class="p">)}</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># values are predefined</span>
+</div><div class='line'><span class="n">values</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span> <span class="s1">&#39;qux&#39;</span><span class="o">]</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Don&#39;t forget the asterisk!</span>
+</div><div class='line'><span class="n">log_all</span><span class="o">.</span><span class="n">call</span> <span class="o">*</span><span class="n">values</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>You can even do this with ActiveRecord <a href="http://api.rubyonrails.org/classes/ActiveRecord/NamedScope/ClassMethods.html" title="ActiveRecord named_scopes">named_scopes</a>, which is wicked cool.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div><div class='line'>    <span class="n">named_scope</span> <span class="ss">:with_names_like</span><span class="p">,</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|*</span><span class="n">names</span><span class="o">|</span>
+</div><div class='line'>        <span class="p">{</span>
+</div><div class='line'>            <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="n">names</span><span class="o">.</span><span class="n">collect</span><span class="p">{</span><span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="s2">&quot;lower(name) like &#39;%?%&#39;&quot;</span><span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39; OR &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_a</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">names</span><span class="p">)</span><span class="o">.</span><span class="n">flatten!</span>
+</div><div class='line'>        <span class="p">}</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="no">User</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">with_names_like</span> <span class="s1">&#39;jeff&#39;</span><span class="p">,</span> <span class="s1">&#39;jose&#39;</span><span class="p">,</span> <span class="s1">&#39;jill&#39;</span>
+</div><div class='line'><span class="c1"># Creates a condition sql string like so:</span>
+</div><div class='line'><span class="c1"># WHERE (lower(name) like &#39;%jeff%&#39; OR lower(name) like &#39;%jose%&#39; OR lower(name) like &#39;%jill%&#39;)</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>I&#8217;m interested to know what other ways you&#8217;ve come up with to use this technique. Please leave a comment below if you have any questions or examples of your own work.</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/variable-length-method-arguments-in-ruby">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+
+  <article>
+    
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/four-things-you-should-know-about-ruby-methods">Four Things You Should Know About Ruby Methods</a></h1>
+    
+    
+      <p class="meta">
+
+
+
+
+<time datetime="2010-06-01 22:27:57 -0600" pubdate  updated >Jun 1<span>st</span>, 2010</time>
+
+
+</p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Just wanted to jot down some of the really cool things I&#8217;ve learned aout the way you can call methods in ruby. I may end up expanding this post into four separate posts with more info if need be, but for now I&#8217;ll try to keep this short.</p>
+
+<h3>1. Default values</h3>
+
+<p>When defining a method with parameters, inevitably you&#8217;ll find that it can prove useful to have some of the params revert to a default value if no value is passed. Other languages like python and php give you similar conventions when providing the parameter list to a method.</p>
+
+<p>To use default values, simply use an equals sign after the parameter name, followed by the default parameter you wish to use. Note however, that while not all params need have a default value assigned, all params that <em>do</em> have defaults must go at the end of the parameter list.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+<span class='line'>15</span>
+<span class='line'>16</span>
+<span class='line'>17</span>
+<span class='line'>18</span>
+<span class='line'>19</span>
+<span class='line'>20</span>
+<span class='line'>21</span>
+<span class='line'>22</span>
+<span class='line'>23</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="c1"># Invalid method definition. Either from_date must be at the end of the method list, or to_date must have a default value</span>
+</div><div class='line'><span class="k">def</span> <span class="nf">back_to_the_future</span><span class="p">(</span><span class="n">from_date</span><span class="o">=</span><span class="mi">1985</span><span class="p">,</span> <span class="n">to_date</span><span class="p">)</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;From Date: </span><span class="si">#{</span><span class="n">from_date</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;To Date: </span><span class="si">#{</span><span class="n">to_date</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="c1"># Valid method definition</span>
+</div><div class='line'><span class="k">def</span> <span class="nf">back_to_the_future</span><span class="p">(</span><span class="n">from_date</span><span class="o">=</span><span class="mi">1985</span><span class="p">,</span> <span class="n">to_date</span><span class="o">=</span><span class="mi">1955</span><span class="p">)</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;From Date: </span><span class="si">#{</span><span class="n">from_date</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;To Date: </span><span class="si">#{</span><span class="n">to_date</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">back_to_the_future</span>
+</div><div class='line'><span class="c1"># =&gt; 1985</span>
+</div><div class='line'><span class="c1"># =&gt; 1955</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">back_to_the_future</span> <span class="mi">2010</span>
+</div><div class='line'><span class="c1"># =&gt; 2010</span>
+</div><div class='line'><span class="c1"># =&gt; 1955</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">back_to_the_future</span> <span class="mi">2010</span><span class="p">,</span> <span class="mi">2000</span>
+</div><div class='line'><span class="c1"># =&gt; 2010</span>
+</div><div class='line'><span class="c1"># =&gt; 2000</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Pretty simple, but hey, maybe you didn&#8217;t know.</p>
+
+<h3>2. &#8220;Named Parameters&#8221; using the special hash parameter</h3>
+
+<p>Python, Objective-C, and various other languages have an interesting syntax for method arguments where you can name an argument beyond the scope in which the method is defined. These named parameters give you the ability to assign values to method arguments in an arbitrary order, since you are assigning a value to a specific parameter by that parameters name.</p>
+
+<p>While ruby doesn&#8217;t have Named Parameter syntax built in, there is one way to gain something very similar, and it has to do with Ruby Hashes. Ruby&#8217;s hash syntax has a very simple, minimalist style that I really like, especially in Ruby 1.9. The interesting thing about using the hash parameter as a &#8220;named parameter&#8221; or &#8220;variable-length&#8221; argument, is that there is no syntactic sugar needed when defining the method. All the interesting work goes on while calling the method.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">def</span> <span class="nf">back_to_the_future</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;From </span><span class="si">#{</span><span class="n">options</span><span class="o">[</span><span class="ss">:from</span><span class="o">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">#{</span><span class="n">options</span><span class="o">[</span><span class="ss">:to</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">back_to_the_future</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="mi">1985</span><span class="p">,</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="mi">1955</span>
+</div><div class='line'><span class="c1"># =&gt; From 1985 to 1955</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">back_to_the_future</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="mi">1985</span><span class="p">,</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="mi">1955</span>
+</div><div class='line'><span class="c1"># =&gt; From 1955 to 1985</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">back_to_the_future</span> <span class="ss">:with_doc</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</div><div class='line'><span class="c1"># =&gt; From  to</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Notice here that we didn&#8217;t have to include the open and close curly braces usually present in a hash definition. You can put them in if you&#8217;d like, but sometimes it&#8217;s more confusing to see it that way (what with block syntax using curly braces or the <code>do...end</code> syntax).</p>
+
+<p>You can still have regularly defined parameters with or without defaults in the parameter list, just make sure they come before the expected hash collection.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">def</span> <span class="nf">back_to_the_future</span><span class="p">(</span><span class="n">from_date</span><span class="p">,</span> <span class="n">to_date</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span> <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">def</span> <span class="nf">back_to_the_future</span><span class="p">(</span><span class="n">from_date</span><span class="p">,</span> <span class="n">to_date</span><span class="o">=</span><span class="mi">1955</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span> <span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="k">def</span> <span class="nf">back_to_the_future</span><span class="p">(</span><span class="n">from_date</span><span class="p">,</span> <span class="n">to_date</span><span class="o">=</span><span class="mi">1955</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{})</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span> <span class="k">end</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>You&#8217;ve probably noticed by now that rails does this <em>all over the place</em>.</p>
+
+<h3>3. Variable-length arguments using the special array parameter</h3>
+
+<p>While named-parameters is nice for passing a list of configuration options to a method, sometimes you just want a method to accept any number of arguments, such as a logger method that can take any number of log messages and log them independent of each other. Ruby has another parameter condensing technique where all parameters passed that do not map to pre-defined arguments get collected into their own special array parameter, that is, if you ask for it. Defining a method in this way, you simply place a parameter at the end of the parameter list with an asterisk (<code>*</code>) preceding the parameter name.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">def</span> <span class="nf">back_to_the_future</span><span class="p">(</span><span class="n">from_date</span><span class="p">,</span> <span class="n">to_date</span><span class="p">,</span> <span class="o">*</span><span class="n">people</span><span class="p">)</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Who&#39;s coming?&quot;</span>
+</div><div class='line'>    <span class="n">people</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">person</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">person</span> <span class="p">}</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">back_to_the_future</span> <span class="mi">1985</span><span class="p">,</span> <span class="mi">1955</span><span class="p">,</span> <span class="s1">&#39;Marty&#39;</span><span class="p">,</span> <span class="s1">&#39;Doc&#39;</span><span class="p">,</span> <span class="s1">&#39;Biff&#39;</span>
+</div><div class='line'><span class="c1"># =&gt; Who&#39;s Coming?</span>
+</div><div class='line'><span class="c1"># =&gt; Marty</span>
+</div><div class='line'><span class="c1"># =&gt; Doc</span>
+</div><div class='line'><span class="c1"># =&gt; Biff</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>Also worth noting is that the parameters collected do not need to be of one type like Java forces you to be. One could be a string, the next a number, the next a boolean. Whether or not that is a good design for your method is another story.</p>
+
+<p>This style of parameter definition can be mixed with all the styles we&#8217;ve discussed so far, just remember the order things go: Regular params, Regular params with defaults, a Hash-collected param (if any), and finally the Array-collected params (where the param is preceded with an asterisk).</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">def</span> <span class="nf">back_to_the_future</span><span class="p">(</span><span class="n">from_date</span><span class="p">,</span> <span class="n">to_date</span><span class="o">=</span><span class="mi">1955</span><span class="p">,</span> <span class="n">delorean_options</span><span class="o">=</span><span class="p">{},</span> <span class="o">*</span><span class="n">people</span><span class="p">)</span>
+</div><div class='line'>    <span class="c1"># ...</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'><span class="n">back_to_the_future</span> <span class="mi">1985</span><span class="p">,</span> <span class="ss">:use_flux_capacitor</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">:bring_back_george</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">,</span> <span class="s1">&#39;Marty&#39;</span><span class="p">,</span> <span class="s1">&#39;Doc&#39;</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<h3>4. Saving the best for last: Blocks!</h3>
+
+<p>Arguably the most powerful feature that Ruby boasts is the ability to send an anonymous function to a method to be executed by the method in whatever way it was designed. Ruby calls these anonymous code blocks just that, <strong>blocks</strong>. In other contexts you might hear them called lambda&#8217;s, procs, or simply anonymous function. You&#8217;ve probably already used blocks a ton in your ruby code, but what exactly are they for, and how can you use them in your own code?</p>
+
+<p>Virtually every class in ruby&#8217;s core make use of blocks to basically extend the language&#8217;s abilities without having to add more syntactic sugar. Take for instance iterating over an array, the conventional way with a for loop, and ruby&#8217;s more idiomatic way, with the <code>each</code> and it&#8217;s associated block.</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">people</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;Marty&#39;</span><span class="p">,</span> <span class="s1">&#39;Doc&#39;</span><span class="p">,</span> <span class="s1">&#39;Biff&#39;</span><span class="o">]</span>
+</div><div class='line'><span class="k">for</span> <span class="n">person</span> <span class="k">in</span> <span class="n">people</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="n">person</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">people</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">person</span><span class="o">|</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="n">person</span>
+</div><div class='line'><span class="k">end</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>The first example uses ruby&#8217;s syntax sugar to run the loop, printing out each entry in the people array. The second calls the <code>each</code> method on the people array, passing it a block. <code>Array#each</code> can and likely will run it&#8217;s own code before or after invoking the block. As a developer outside looking in, it doesn&#8217;t really matter to me what <code>each</code> does, so long a it calls my block for each element in the array. If we were to write a simplification of what ruby is doing in the background, it&#8217;d probably look something like this:</p>
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">def</span> <span class="nf">each</span>
+</div><div class='line'>    <span class="k">for</span> <span class="n">e</span> <span class="k">in</span> <span class="nb">self</span>
+</div><div class='line'>        <span class="k">yield</span> <span class="n">e</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>But wait a minute, isn&#8217;t that what we wrote in our first example without the block? Indeed, it&#8217;s very similar. Where our block example differs is that we have the ability to pass an anonymous block of code to the <code>each</code> method. When <code>each</code> is ready to call our block, it invokes yield, passing the argument applicable, in this case the <code>e</code> variable. In other words, <code>each</code> is handling the iteration for us, allowing us to focus on what matters more, the code being run for each iteration.</p>
+
+<p>Syntactically, the big things to jot down with defining your methods to accept blocks are as follows:</p>
+
+<ul>
+<li>All methods implicitly may receive a block as an argument.</li>
+<li>If you want to name this argument, for whatever reason, it must be last in the argument list, and preceded by an ampersand <code>&amp;amp;</code>.</li>
+<li>Just as all methods implicitly may receive a block, you can always check in a given method if a block was given, by calling <code>block_given?</code>.</li>
+<li>TO invoke a block, simply call the yield method, passing any paramters your block may be expecting</li>
+<li>Alternatively, if you have named the block, say <code>&amp;func</code>, treat it as a lambda or proc that is passed to you (because that&#8217;s what <em>was</em> passed), using the built-in <code>call</code> method available to procs: <code>func.call(some_param)</code>.</li>
+</ul>
+
+
+<figure role=code><div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
+<span class='line'>2</span>
+<span class='line'>3</span>
+<span class='line'>4</span>
+<span class='line'>5</span>
+<span class='line'>6</span>
+<span class='line'>7</span>
+<span class='line'>8</span>
+<span class='line'>9</span>
+<span class='line'>10</span>
+<span class='line'>11</span>
+<span class='line'>12</span>
+<span class='line'>13</span>
+<span class='line'>14</span>
+</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">def</span> <span class="nf">back_to_the_future</span><span class="p">(</span><span class="o">*</span><span class="n">people</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cool_block_name</span><span class="p">)</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="s2">&quot;We&#39;re going back to the future with...&quot;</span>
+</div><div class='line'>    <span class="n">people</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">person</span><span class="o">|</span>
+</div><div class='line'>        <span class="n">cool_block_name</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">person</span><span class="p">)</span>
+</div><div class='line'>    <span class="k">end</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'>
+</div><div class='line'><span class="n">back_to_the_future</span> <span class="s1">&#39;Marty&#39;</span><span class="p">,</span> <span class="s1">&#39;Doc&#39;</span><span class="p">,</span> <span class="s1">&#39;Biff&#39;</span> <span class="k">do</span> <span class="o">|</span><span class="n">person</span><span class="o">|</span>
+</div><div class='line'>    <span class="nb">puts</span> <span class="n">person</span>
+</div><div class='line'><span class="k">end</span>
+</div><div class='line'><span class="c1"># =&gt; We&#39;re going back to the future with...</span>
+</div><div class='line'><span class="c1"># =&gt; Marty</span>
+</div><div class='line'><span class="c1"># =&gt; Doc</span>
+</div><div class='line'><span class="c1"># =&gt; Biff</span>
+</div></code></pre></td></tr></table></div></figure>
+
+<p>All of these examples are obviously contrived, but I hope it sheds some light on some really cool things you can do in ruby with simple method definitions. I&#8217;ll likely be doing more posts with blocks, procs, and lambda&#8217;s in the future, since they are definitely the most powerful tools in the shed (as far as methods go), so look for those sometime in the near future.</p>
+
+<p>Please let me know if you find any omissions or errors in the above examples and explanations. Happy Coding!</p>
+</div>
+  <footer>
+    <a rel="full-article" href="/blog/four-things-you-should-know-about-ruby-methods">Read on &rarr;</a>
+  </footer>
+
+
+  </article>
+
+<nav role="pagination">
+  <div>
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</nav>
+
+<script type="text/javascript">
+    var disqus_shortname = 'rand9';
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</div>
+<aside role=sidebar>
+  
+    <section>
+  <h1>About rand9</h1>
+  
+  <p><img src="http://www.gravatar.com/avatar/c8ef74aab2e973ba0f7da5557e0ba9a9?s=128&amp;d=identicon&amp;r=PG" width="" height="" alt="BJ Neilsen" title="BJ Neilsen"></p>
+
+  <p>rand9 is the outpouring of though from <a href="http://twitter.com/#!/localshred" title="@localshred">@localshred</a>; Father of two, developer, lead software architect <a href="http://twitter.com/#!/MoneyDesktop" title="@MoneyDesktop">@MoneyDesktop</a>, soccer coach &amp; fanatic, <a href="http://twitter.com/#!/RealSaltLake" title="@RealSaltLake">@RealSaltLake</a> devotee, gardener, chicken-raiser, infrequent triathlete, climber, and all around outdoors enthusiast.</p>
+
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/picking-the-right-number-as-quickly-as-possible">Binary search in ruby, or, &#8220;Picking the right number, as quickly as possible&#8221;</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/git-pre-receive-hook-for-rejecting-a-bad-gemfile">Git pre-receive hook for rejecting a bad Gemfile</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/thor-script-for-managing-a-unicorn-driven-app">Thor script for managing a Unicorn-driven app</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/mapping-object-values-with-rubys-ampersand-symbol-technique">Mapping object values with Ruby&#8217;s ampersand-symbol technique</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/areas-of-focus">Areas of Focus</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("localshred", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/localshred" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @localshred</a>
+  
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer><p>
+  Copyright &copy; 2011 - BJ Neilsen -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+</body>
+</html>
