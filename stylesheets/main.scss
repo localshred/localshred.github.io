@@ -1,0 +1,65 @@
+body {
+  /* font-family: "Georgia", "Book Antiqua", "Palatino", serif;*/
+  font-family: "Monaco", "Courier New", monospace;
+  font-size: 18px;
+  line-height: 1.7em;
+  background-color: #fafaee;
+  color: #161706;
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  border-top: 3px solid #732914;
+  border-bottom: 13px solid #732914;
+  margin: 0 50px;
+  padding: 50px 0;
+  max-width: 1000px;
+}
+
+pre {
+  background: #f6f6e1;
+  border-left: 3px solid #5e6120;
+  margin-left: 15px;
+  overflow-x: auto;
+}
+
+nav#post-nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    li {
+      display: inline-block;
+      width: 50%;
+      margin: 0;
+      padding: 0;
+
+      &.next {
+        text-align: right;
+      }
+    }
+  }
+}
+
+article {
+  h1:before {
+    content: '# ';
+  }
+  h2:before {
+    content: '## ';
+  }
+  h3:before {
+    content: '### ';
+  }
+  h4:before {
+    content: '#### ';
+  }
+  h5:before {
+    content: '##### ';
+  }
+  h6:before {
+    content: '###### ';
+  }
+}

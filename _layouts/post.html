@@ -1,0 +1,17 @@
+---
+layout: main
+---
+<nav id="post-nav">
+  <ul>
+    <li class="prev"><a href="{{ page.previous.url }}" title="Go Back: {{ page.previous.title }}">&larr; {{ page.previous.title }}</a></li>
+    <li class="next"><a href="{{ page.next.url }}" title="Up Next: {{ page.next.title }}">{{ page.next.title }} &rarr;</a></li>
+  </ul>
+</nav>
+
+<article>
+<h1 id="entry-title">{{ page.title }}</h1>
+<byline>{{ page.date | date_to_string }}</byline>
+
+{{ content }}
+</article>
+
