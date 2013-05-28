@@ -2,26 +2,28 @@
 <html>
   <head>
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
-    <link rel="stylesheet" href="/stylesheets/pygments.css" type="text/css">
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/css/foundation.css" type="text/css">
+    <link rel="stylesheet" href="/css/pygments.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <script type="text/javascript" src="/js/foundation.min.js"></script>
   </head>
 
   <body>
     <div id="main">
       <header>
-        <h1>localshred</h1>
-
         <nav>
-        <ul>
-          <li><a href="/">posts</a></li>
-        </ul>
+          <ul>
+            <li><a href="/">posts</a></li>
+            <li><a href="https://twitter.com/localshred">twitter</a></li>
+            <li><a href="https://github.com/localshred">github</a></li>
+          </ul>
         </nav>
       </header>
 
       {{ content }}
 
       <footer>
-      <p>This is where something cool would go.</p>
       </footer>
     </div>
   </body>

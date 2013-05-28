@@ -1,37 +1,30 @@
 ---
 layout: main
 ---
-<!--
-
-paginator.per_page Number of posts per page.
-paginator.posts Posts availablenessble for that page.
-paginator.total_posts Total number of posts.
-paginatortor.total_pages Total number of pages.
-paginator.page The number of Totalhe current page.
-paginator.previous_page The number of the previous paginatorge.
-paginator.next_page The number of the next page.
-
--->
-
-<p>Page {{ paginator.page }} of {{ paginator.total_pages }}</p>
-{% if paginator.previous_page %}
-<p><a href="/page{{ paginator.previous_page }}" title="Page {{ paginator.previous_page }}">Previous &laquo;</a></p>
-{% endif %}
-{% if paginator.next_page %}
-<p><a href="/page{{ paginator.next_page }}" title="Page {{ paginator.next_page }}">Next &raquo;</a></p>
-{% endif %}
 
 {% for post in paginator.posts %}
 <article>
-  <h1><a href="{{ post.url }}" title ="{{ post.title }}">{{ post.title }}</a></h1>
+  <h3><a href="{{ post.url }}" title ="{{ post.title }}">{{ post.title }}</a></h3>
+  <byline>bj / {{ post.date | date: "%Y %b %d" }}</byline>
   {{ post.content }}
 </article>
 {% endfor %}
 
-{% if paginator.previous_page %}
-<p><a href="/page{{ paginator.previous_page }}" title="Page {{ paginator.previous_page }}">Previous &laquo;</a></p>
-{% endif %}
-{% if paginator.next_page %}
-<p><a href="/page{{ paginator.next_page }}" title="Page {{ paginator.next_page }}">Next &raquo;</a></p>
-{% endif %}
-<p>Page {{ paginator.page }} of {{ paginator.total_pages }}</p>
+<div class="pagination-centered">
+  <ul id="post-pagination" class="pagination">
+    <li class="arrow{% if paginator.previous_page %} unavailable{% endif %}">
+    <a href="/{{ paginator.previous_page_path }}" title="Previous Page">&larr;</a>
+    </li>
+    <li{% if paginator.page == 1 %} class="current unavailable"{% endif %}>
+      <a href="/">1</a>
+    </li>
+    {% for count in (2..paginator.total_pages) %}
+      <li{% if count == paginator.page %} class="current unavailable"{% endif %}>
+        <a href="/page{{ count }}">{{ count }}</a>
+      </li>
+    {% endfor %}
+    <li class="arrow{% if paginator.next_page %} unavailable{% endif %}">
+      <a href="/{{ paginator.next_page_path }}" title="Next Page">&rarr;</a>
+    </li>
+  </ul>
+</div>
