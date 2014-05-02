@@ -4,8 +4,8 @@ layout: main
 
 {% for post in paginator.posts %}
 <article>
-  <h3><a href="{{ post.url }}" title ="{{ post.title }}">{{ post.title }}</a></h3>
-  <byline>bj / {{ post.date | date: "%Y %b %d" }}</byline>
+  <h2><a href="{{ post.url }}" title ="{{ post.title }}">{{ post.title }}</a></h2>
+  <byline>{{ post.date | date_to_string }}</byline>
   {{ post.content }}
 </article>
 {% endfor %}
@@ -13,7 +13,7 @@ layout: main
 <div class="pagination-centered">
   <ul id="post-pagination" class="pagination">
     <li class="arrow{% if paginator.previous_page %} unavailable{% endif %}">
-    <a href="/{{ paginator.previous_page_path }}" title="Previous Page">&larr;</a>
+    <a href="{{ paginator.previous_page_path }}" title="Previous Page">&larr;</a>
     </li>
     <li{% if paginator.page == 1 %} class="current unavailable"{% endif %}>
       <a href="/">1</a>
@@ -24,7 +24,7 @@ layout: main
       </li>
     {% endfor %}
     <li class="arrow{% if paginator.next_page %} unavailable{% endif %}">
-      <a href="/{{ paginator.next_page_path }}" title="Next Page">&rarr;</a>
+      <a href="{{ paginator.next_page_path }}" title="Next Page">&rarr;</a>
     </li>
   </ul>
 </div>

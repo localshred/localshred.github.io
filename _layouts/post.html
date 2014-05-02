@@ -1,31 +1,20 @@
 ---
 layout: main
 ---
-<nav class="post-nav header">
-  <ul>
-    {% if page.previous %}
-    <li class="prev"><a href="{{ page.previous.url }}" title="Go Back: {{ page.previous.title }}">&larr; {{ page.previous.title }}</a></li>
-    {% endif %}
-    {% if page.next %}
-    <li class="next"><a href="{{ page.next.url }}" title="Up Next: {{ page.next.title }}">{{ page.next.title }} &rarr;</a></li>
-    {% endif %}
-  </ul>
-</nav>
-
 <article>
-  <h3 id="entry-title">{{ page.title }}</h3>
+  <h2 id="entry-title">{{ page.title }}</h2>
   <byline>{{ page.date | date_to_string }}</byline>
 
   {{ content }}
 </article>
 
-<nav class="post-nav footer">
+<nav class="post-nav">
   <ul>
     {% if page.previous %}
-    <li class="prev"><a href="{{ page.previous.url }}" title="Go Back: {{ page.previous.title }}">&larr; {{ page.previous.title }}</a></li>
+    <li class="prev">Previously: <a href="{{ page.previous.url }}" title="Go Back: {{ page.previous.title }}">{{ page.previous.title }}</a></li>
     {% endif %}
     {% if page.next %}
-    <li class="next"><a href="{{ page.next.url }}" title="Up Next: {{ page.next.title }}">{{ page.next.title }} &rarr;</a></li>
+    <li class="next">Next: <a href="{{ page.next.url }}" title="Up Next: {{ page.next.title }}">{{ page.next.title }}</a></li>
     {% endif %}
   </ul>
 </nav>

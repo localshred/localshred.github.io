@@ -55,7 +55,7 @@ tags:
 
 The script above monitors pushes to the "master" and "stable" branches (our development and production lines, respectively). It checks to see if the Gemfile was listed in the new commit file list, then parses the blob of the Gemfile for any of the offending options. Each offending line is then output back to the pushing developer with instructions on how to fix his/her Gemfile and how to amend the commit. Here's what the output looks like:
 
-{% highlight sh %}
+{% highlight bash %}
   $ git push origin master
   Counting objects: 5, done.
   Delta compression using up to 8 threads.
@@ -67,7 +67,7 @@ The script above monitors pushes to the "master" and "stable" branches (our deve
   remote: > !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   remote: > ---- PUSH REJECTED by origin ----
   remote: >
-  remote: > You've specified an invalid option for 2 gem definitions in the Gemfile
+  remote: > You\'ve specified an invalid option for 2 gem definitions in the Gemfile
   remote: > Invalid options are: git, tag, branch, path
   remote: >
   remote: > The offending gems:

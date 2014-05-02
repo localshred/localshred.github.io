@@ -44,12 +44,13 @@ header {
 }
 
 pre {
-  background: #fff;
-  border-left: 3px solid #5e6120;
+  background: #f8f8f8;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
   overflow-x: auto;
   line-height: 1em;
   font-size: .9em;
-  padding: 10px 0;
+  padding: 8px 15px;
   margin-bottom: 22px;
 }
 
@@ -92,10 +93,6 @@ and (-webkit-device-pixel-ratio: 2) {
   #main {
     max-width: none;
     padding: 50px 20px;
-  }
-
-  nav.post-nav.header {
-    display: none;
   }
 }
 
