@@ -4,8 +4,9 @@ layout: main
 
 {% for post in paginator.posts %}
 <article>
-  <h2><a href="{{ post.url }}" title ="{{ post.title }}">{{ post.title }}</a></h2>
   <byline>{{ post.date | date_to_string }}</byline>
+  <h2 class="article-title"><a href="{{ post.url }}" title ="{{ post.title }}">{{ post.title }}</a></h2>
+
   {{ post.content }}
 </article>
 {% endfor %}

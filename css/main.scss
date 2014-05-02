@@ -80,7 +80,20 @@ byline {
   padding-bottom: 20px;
   color: #997373;
   font-size: .6em;
+  margin: 0;
+  padding: 0;
 }
+
+article {
+  border-bottom: 1px dotted $body_border_color;
+  margin-bottom: 30px;
+
+  .article-title {
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
 
 a:hover,
 a:visited:hover {
