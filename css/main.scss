@@ -4,8 +4,11 @@ $body_border_color: #732914;
 
 body {
   font: {
-    size: 18px;
+    family: 'Exo 2', sans-serif;
+    weight: 400;
+    size: 1.2em;
   }
+
   line-height: 1.7em;
   background-color: $background_color;
   color: $text_color;
@@ -13,12 +16,20 @@ body {
   padding: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font: {
+    family: 'Exo 2', sans-serif;
+    weight: 200;
+    style: italic;
+  }
+}
+
 #main {
-  border-top: 3px solid $body_border_color;
-  border-bottom: 13px solid $body_border_color;
-  margin: 0 50px;
+  border-top: .2em solid $body_border_color;
+  border-bottom: .8em solid $body_border_color;
+  margin: 0 auto;
   padding: 50px 0;
-  max-width: 1000px;
+  max-width: 768px;
 }
 
 header {
@@ -34,11 +45,10 @@ header {
 
 pre {
   background: #fff;
-  /*background: #f6f6e1;*/
   border-left: 3px solid #5e6120;
   overflow-x: auto;
   line-height: 1em;
-  font-size: 16px;
+  font-size: .9em;
   padding: 10px 0;
   margin-bottom: 22px;
 }
@@ -52,7 +62,7 @@ nav.post-nav {
     li {
       display: inline-block;
       vertical-align: top;
-      font-size: 14px;
+      font-size: .8em;
       width: 40%;
       margin: 0;
       padding: 0;
@@ -68,10 +78,41 @@ byline {
   display: inline-block;
   padding-bottom: 20px;
   color: #997373;
-  font-size: 12px;
+  font-size: .6em;
 }
 
 a:hover,
 a:visited:hover {
   text-decoration: underline;
+}
+
+@media screen
+and (max-device-width: 640px)
+and (-webkit-device-pixel-ratio: 2) {
+  #main {
+    max-width: none;
+    padding: 50px 20px;
+  }
+
+  nav.post-nav.header {
+    display: none;
+  }
+}
+
+@media screen
+and (max-device-width: 640px)
+and (-webkit-device-pixel-ratio: 2)
+and (orientation: portrait) {
+  body {
+    font-size: 3.2em;
+  }
+}
+
+@media screen
+and (max-device-width: 640px)
+and (-webkit-device-pixel-ratio: 2)
+and (orientation: landscape) {
+  body {
+    font-size: 2.2em;
+  }
 }

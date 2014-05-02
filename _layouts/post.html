@@ -1,7 +1,7 @@
 ---
 layout: main
 ---
-<nav class="post-nav">
+<nav class="post-nav header">
   <ul>
     {% if page.previous %}
     <li class="prev"><a href="{{ page.previous.url }}" title="Go Back: {{ page.previous.title }}">&larr; {{ page.previous.title }}</a></li>
@@ -14,12 +14,12 @@ layout: main
 
 <article>
   <h3 id="entry-title">{{ page.title }}</h3>
-  <byline>bj / {{ page.date | date_to_string }}</byline>
+  <byline>{{ page.date | date_to_string }}</byline>
 
   {{ content }}
 </article>
 
-<nav class="post-nav">
+<nav class="post-nav footer">
   <ul>
     {% if page.previous %}
     <li class="prev"><a href="{{ page.previous.url }}" title="Go Back: {{ page.previous.title }}">&larr; {{ page.previous.title }}</a></li>

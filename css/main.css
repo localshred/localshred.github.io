@@ -1,5 +1,5 @@
 body {
-  font-size: 18px;
+  font-size: 1.2em;
   line-height: 1.7em;
   background-color: #f4f0ec;
   color: #161706;
@@ -22,11 +22,10 @@ header nav {
 
 pre {
   background: #fff;
-  /*background: #f6f6e1;*/
   border-left: 3px solid #5e6120;
   overflow-x: auto;
   line-height: 1em;
-  font-size: 16px;
+  font-size: .9em;
   padding: 10px 0;
   margin-bottom: 22px; }
 
@@ -37,7 +36,7 @@ nav.post-nav ul {
   nav.post-nav ul li {
     display: inline-block;
     vertical-align: top;
-    font-size: 14px;
+    font-size: .8em;
     width: 40%;
     margin: 0;
     padding: 0; }
@@ -48,8 +47,16 @@ byline {
   display: inline-block;
   padding-bottom: 20px;
   color: #997373;
-  font-size: 12px; }
+  font-size: .6em; }
 
 a:hover,
 a:visited:hover {
   text-decoration: underline; }
+
+@media screen
+and (max-device-width: 640px)
+and (-webkit-device-pixel-ratio: 2) {
+  body {
+    font-size: 3.2em;
+  }
+}
