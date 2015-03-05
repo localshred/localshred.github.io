@@ -1,6 +1,6 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'jekyll'
-gem 'jekyll-sass'
-gem 'rdiscount'
+gem "jekyll"
+gem "jekyll-sass"
+gem "rdiscount"
 

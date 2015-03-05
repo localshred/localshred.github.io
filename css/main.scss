@@ -3,7 +3,7 @@
 
 $background_color: #F4F0EC;
 $text_color: #161706;
-$body_border_color: #732914;
+$highlight_color: #732914;
 
 body {
   font: {
@@ -28,8 +28,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #main {
-  border-top: .2em solid $body_border_color;
-  border-bottom: .8em solid $body_border_color;
+  border-top: .2em solid $highlight_color;
+  border-bottom: .8em solid $highlight_color;
   margin: 0 auto;
   padding: 50px 0;
   max-width: 768px;
@@ -42,6 +42,10 @@ header {
     padding: 0 0 0 30px;
     ul {
       list-style: none;
+
+      li {
+        text-align: center;
+      }
     }
   }
 }
@@ -88,19 +92,42 @@ byline {
 }
 
 article {
-  border-bottom: 1px dotted $body_border_color;
+  border-bottom: 1px dotted $highlight_color;
   margin-bottom: 30px;
 
   .article-title {
     margin-top: 0;
     padding-top: 0;
+    color: $highlight_color;
+
+    a {
+      border: none;
+    }
+  }
+
+  ul {
+    margin-left: 20px;
   }
 }
 
+blockquote {
+  font-style: italic;
+  color: $highlight_color;
+
+  p {
+    color: $highlight_color;
+  }
+}
+
+a {
+  color: $highlight_color;
+  border-bottom: 1px dotted $highlight_color;
+}
 
 a:hover,
 a:visited:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom: 1px solid $highlight_color;
 }
 
 @media screen
