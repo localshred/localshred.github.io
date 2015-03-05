@@ -20,8 +20,9 @@ markdown: rdiscount
 permalink: none
 paginator: true
 paginate: 5
+encoding: utf-8
 rdiscount:
   extensions: []
 sass:
   syntax: scss
-  style: expanded
+  style: compressed
