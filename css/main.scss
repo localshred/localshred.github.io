@@ -119,6 +119,14 @@ blockquote {
   }
 }
 
+pre {
+  font-size: .8em;
+}
+
+code {
+  font-weight: normal;
+}
+
 a {
   color: $highlight_color;
   border-bottom: 1px dotted $highlight_color;
