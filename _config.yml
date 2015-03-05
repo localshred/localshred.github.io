@@ -6,8 +6,6 @@ source: .
 destination: ./_site
 plugins: ./_plugins
 timezone: 'America/Denver'
-gems:
-  - 'jekyll-sass'
 include:
   - 'css/'
 exclude:
