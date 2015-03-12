@@ -9,6 +9,7 @@ timezone: 'America/Denver'
 include:
   - 'css/'
 exclude:
+  - 'Rakefile'
   - 'Gemfile'
   - 'Gemfile.lock'
 future: true
