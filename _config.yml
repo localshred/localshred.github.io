@@ -12,6 +12,7 @@ exclude:
   - 'Rakefile'
   - 'Gemfile'
   - 'Gemfile.lock'
+  - '_ideas.md'
 future: true
 lsi: false
 highlighter: pygments
