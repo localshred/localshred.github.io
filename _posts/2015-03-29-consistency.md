@@ -89,7 +89,7 @@ Pick style guide rules that help your team to be consistent now and in the futur
 
 I have had individual developers complain to me about the usage of a style guide and I'll be honest, it boggles my mind. If you find negative value in adhering to a style guide, what you're saying is that your preferences are more important than the health of the codebase over time. Yes, I believe adherence to a style guide produces a healthy codebase.
 
-Your style guide shouldn't contain every possible rule anyone can conceive, merely the preferences which are generally controversial or tend to be confusing to your team. Preferences that drive Sally to produce code that _feels_ different than Jeff's. Everyone has their own style, and that style should never be discouraged as "wrong". Just try to find a commong ground that's consistent and discoverable.
+Your style guide shouldn't contain every possible rule anyone can conceive, merely the preferences which are generally controversial or tend to be confusing to your team. Preferences that drive Sally to produce code that _feels_ different than Jeff's. Everyone has their own style, and that style should never be discouraged as "wrong". Just try to find a common ground that's consistent and discoverable.
 
 ### 2. Use Trusted/Tested Community Libraries
 
