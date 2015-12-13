@@ -1,0 +1,127 @@
+@import "pure.css";
+@import "minesweeper.css";
+@import "tic-tac-toe.css";
+
+body {
+  font-family: "Georgia", serif;
+  background: #ccc;
+}
+
+header {
+  border-bottom: 1px solid #262633;
+  padding: 10px 0;
+  background: #262633;
+  color: #fff;
+}
+
+header nav {
+}
+
+footer {
+  text-align: center;
+  font-size: 10px;
+  color: #777;
+  border-top: 1px solid #262633;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  flex: 0 0 100%;
+}
+
+.game {
+  padding: 20px;
+  background: #eee;
+  min-height: 500px;
+}
+
+.game-selector-menu {
+  text-align: center;
+}
+
+.no-game {
+  text-align: center;
+}
+
+.game-controls {
+  flex: 0 0 100%;
+}
+
+.current-player {
+}
+
+.info-panel {
+}
+
+.board {
+  width: auto;
+  margin: 0 auto;
+}
+
+.board .row {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+	justify-content: flex-start;
+	-webkit-justify-content: flex-start;
+
+	align-items: space-around;
+	align-content: flex-start;
+
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.row-item {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  -moz-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.square {
+  width: 150px;
+  height: 150px;
+  max-width: 33%;
+  border: 1px solid grey;
+  flex: 0 1 fit-content;
+  text-align: center;
+  font-size: 130px;
+}
+
+.selectable {
+  cursor: hand;
+}
+
+.player-x {
+  color: purple;
+  font-weight: bold;
+}
+
+.player-o {
+  color: green;
+  font-weight: bold;
+}
+
+.square.selected.player-x {
+  border: 1px solid purple;
+}
+
+.square.selected.player-o {
+  border: 1px solid green;
+}
+
+.square.selected.player-x::before {
+  content: "X";
+}
+
+.square.selected.player-o::before {
+  content: "O";
+}

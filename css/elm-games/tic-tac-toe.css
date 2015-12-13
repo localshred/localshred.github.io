@@ -1,0 +1,79 @@
+.game-controls {
+  flex: 0 0 100%;
+}
+
+.current-player {
+}
+
+.info-panel {
+}
+
+.board {
+  width: 100%;
+  margin: auto;
+}
+
+.board .row {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+	justify-content: flex-start;
+	-webkit-justify-content: flex-start;
+
+	align-items: space-around;
+	align-content: flex-start;
+
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.row-item {
+  -webkit-flex: 0 0 33%;
+  -ms-flex: 0 0 33%;
+  -moz-flex: 0 0 33%;
+  flex: 0 0 33%;
+}
+
+.square {
+  width: 150px;
+  height: 150px;
+  max-width: 33%;
+  border: 1px solid grey;
+  flex: 0 1 fit-content;
+  text-align: center;
+  font-size: 130px;
+}
+
+.selectable {
+  cursor: hand;
+}
+
+.player-x {
+  color: purple;
+  font-weight: bold;
+}
+
+.player-o {
+  color: green;
+  font-weight: bold;
+}
+
+.square.selected.player-x {
+  border: 1px solid purple;
+}
+
+.square.selected.player-o {
+  border: 1px solid green;
+}
+
+.square.selected.player-x::before {
+  content: "X";
+}
+
+.square.selected.player-o::before {
+  content: "O";
+}
