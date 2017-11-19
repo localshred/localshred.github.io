@@ -4,7 +4,9 @@ baseurl: /
 url: http://localhost:4000
 source: .
 destination: ./_site
-plugins: ./_plugins
+plugins:
+  - bundler
+  - jekyll-paginate
 timezone: 'America/Denver'
 include:
   - 'css/'
@@ -15,8 +17,8 @@ exclude:
   - '_ideas.md'
 future: true
 lsi: false
-highlighter: pygments
-markdown: rdiscount
+highlighter: rouge
+markdown: redcarpet
 permalink: none
 paginator: true
 paginate: 5
