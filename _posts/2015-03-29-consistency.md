@@ -48,7 +48,7 @@ The style guide really is one of the best things you can have. You will hire ple
 
 __The "right" style guide is the one whereby following it, your team can consistently produce relatively bug-free software in a timely manner.__
 
-A trivial example is bracing. Many languages allow you to omit braces for single line `if`/`else` blocks, but if you want to execute multiple statements per block, you've got to use braces ([Hearbleed](https://en.wikipedia.org/wiki/Heartbleed) anyone?).
+A trivial example is bracing. Many languages allow you to omit braces for single line `if`/`else` blocks, but if you want to execute multiple statements per block, you've got to use braces ([Heartbleed](https://en.wikipedia.org/wiki/Heartbleed) anyone?).
 
 {% highlight csharp %}
 if (foo.IsValid())
