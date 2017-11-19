@@ -7,7 +7,6 @@ tags:
 - business-related
 - inspiration
 ---
-![AHA!](http://www.alhome.net/blog_photos/aha_moment.gif "AHA!")
 
 Just over two months ago I made a [promise]({% post_url 2009-01-15-turning-off-the-corporate-cruise-control %} "Turning off the Corporate Cruise-Control") to you. If you have no idea what I'm talking about, that's probably good and bad. The promise I made at the end of the article [Turning off the Corporate Cruise-Control]({% post_url 2009-01-15-turning-off-the-corporate-cruise-control %} "Turning off the Corporate Cruise-Control") was that I would **_within a day or two_** provide a followup post detailing actions one could take with the knowledge. I have since utterly broken this promise for which I profusely apologize. As promised, I'm continuing the thread where I pointed out the obvious benefits that can come from building an Automated Income Stream, or simply, AIS.
 
