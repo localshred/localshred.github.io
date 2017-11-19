@@ -6,6 +6,7 @@ source: .
 destination: ./_site
 plugins:
   - bundler
+  - jekyll-maps
   - jekyll-paginate
 timezone: 'America/Denver'
 include:
@@ -18,6 +19,11 @@ exclude:
 future: true
 lsi: false
 highlighter: rouge
+maps:
+  google:
+    api_key: AIzaSyD4G4S9xDBG2EuEo2MgVCvgAwlFTvYHls4
+    maker_cluster:
+      enabled: true
 markdown: redcarpet
 permalink: none
 paginator: true
@@ -28,3 +34,5 @@ rdiscount:
 sass:
   style: expanded
   deploy_style: compressed
+collections:
+  - travel
