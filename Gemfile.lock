@@ -100,8 +100,6 @@ GEM
     jekyll-github-metadata (2.9.3)
       jekyll (~> 3.1)
       octokit (~> 4.0, != 4.4.0)
-    jekyll-maps (2.0.4)
-      jekyll (~> 3.0)
     jekyll-mentions (1.2.0)
       activesupport (~> 4.0)
       html-pipeline (~> 2.3)
@@ -193,7 +191,6 @@ GEM
     rb-fsevent (0.10.2)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    redcarpet (3.4.0)
     rouge (2.2.1)
     safe_yaml (1.0.4)
     sass (3.5.3)
@@ -218,8 +215,6 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages (= 167)
-  jekyll-maps (~> 2.0, >= 2.0.4)
-  redcarpet (~> 3.4)
   rouge (~> 2.2.1)
 
 BUNDLED WITH

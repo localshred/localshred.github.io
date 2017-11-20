@@ -6,7 +6,6 @@ source: .
 destination: ./_site
 plugins:
   - bundler
-  - jekyll-maps
   - jekyll-paginate
 timezone: 'America/Denver'
 include:
