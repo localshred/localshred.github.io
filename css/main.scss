@@ -5,7 +5,8 @@ $background_color: #F4F0EC;
 $text_color: #161706;
 $highlight_color: #732914;
 
-body {
+html, body {
+  height: 100%;
   font: {
     family: "Exo 2", sans-serif;
     weight: 400;
@@ -31,19 +32,28 @@ h1, h2, h3, h4, h5, h6 {
   border-top: .2em solid $highlight_color;
   border-bottom: .8em solid $highlight_color;
   margin: 0 auto;
-  padding: 50px 0;
+  padding-bottom: 50px;
   max-width: 768px;
+  height: 100%;
+}
+
+content {
+  height: 100%;
+  width: 100%;
 }
 
 header {
   nav {
     float: right;
     margin: 0;
+    margin-bottom: 50px;
     padding: 0 0 0 30px;
     ul {
       list-style: none;
 
       li {
+        float: left;
+        margin: 10px;
         text-align: right;
       }
     }
@@ -136,6 +146,11 @@ a:hover,
 a:visited:hover {
   text-decoration: none;
   border-bottom: 1px solid $highlight_color;
+}
+
+#map {
+  height: 600px;
+  width: 100%;
 }
 
 @media screen

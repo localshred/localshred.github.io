@@ -1,0 +1,739 @@
+[
+  {
+    "title": "Orem/Provo, Utah, USA",
+    "dateStart": null,
+    "dateEnd": null,
+    "position": {
+      "lat": 40.251430,
+      "lng": -111.712599
+    }
+  },
+  {
+    "title": "Colonia Juárez, Chihuahua, México",
+    "dateStart": "2002-06-25",
+    "family": false,
+    "position": {
+      "lat": 30.304600,
+      "lng": -108.081546
+    }
+  },
+  {
+    "title": "Saint Louis (Saint Ann), Missouri, USA",
+    "dateStart": "2002-07-17",
+    "dateEnd": "2002-10-09",
+    "family": false,
+    "position": {
+      "lat": 38.740213,
+      "lng": -90.375244
+    }
+  },
+  {
+    "title": "Saint Louis (Kirkwood), Missouri, USA",
+    "dateStart": "2002-10-09",
+    "dateEnd": "2003-01-03",
+    "family": false,
+    "position": {
+      "lat": 38.574846,
+      "lng": -90.391875
+    }
+  },
+  {
+    "title": "Seattle, Washington, USA",
+    "dateStart": "2003-07-05",
+    "dateEnd": null,
+    "family": false,
+    "position": {
+      "lat": 47.604234,
+      "lng": -122.339111
+    }
+  },
+  {
+    "title": "La Jolla, California, USA",
+    "dateStart": "2004-06-26",
+    "dateEnd": null,
+    "position": {
+      "lat": 32.830802,
+      "lng": -117.281124
+    }
+  },
+  {
+    "title": "Jackson Hole, Wyoming, USA",
+    "dateStart": "2004-09-05",
+    "dateEnd": null,
+    "position": {
+      "lat": 43.474393,
+      "lng": -110.755857
+    }
+  },
+  {
+    "title": "Yellowstone, Wyoming, USA",
+    "dateStart": "2004-09-08",
+    "dateEnd": "2004-09-13",
+    "position": {
+      "lat": 44.459790,
+      "lng": -110.831217
+    }
+  },
+  {
+    "title": "Puerto Vallarta, México",
+    "dateStart": "2005-05-30",
+    "dateEnd": "2005-06-10",
+    "position": {
+      "lat": 20.681991,
+      "lng": -105.289176
+    }
+  },
+  {
+    "title": "Orlando, Florida, USA",
+    "dateStart": "2007-06-01",
+    "dateEnd": "2007-06-07",
+    "position": {
+      "lat": 28.420069,
+      "lng": -81.580357
+    }
+  },
+  {
+    "title": "Cocoa Beach, Florida, USA",
+    "dateStart": "2007-06-03",
+    "dateEnd": null,
+    "position": {
+      "lat": 28.318212,
+      "lng": -80.606980
+    }
+  },
+  {
+    "title": "Saint Petersburg, Florida, USA",
+    "dateStart": "2007-06-05",
+    "dateEnd": null,
+    "position": {
+      "lat": 27.735830,
+      "lng": -82.752324
+    }
+  },
+  {
+    "title": "Newport Beach, California, USA",
+    "dateStart": "2008-08-01",
+    "dateEnd": "2008-08-07",
+    "position": {
+      "lat": 33.615584,
+      "lng": -117.935708
+    }
+  },
+  {
+    "title": "Eugene, Oregon",
+    "dateStart": "2009-06-01",
+    "dateEnd": "2009-06-07",
+    "position": {
+      "lat": 44.060891,
+      "lng": -123.104700
+    }
+  },
+  {
+    "title": "Denver, Colorado, USA",
+    "dateStart": "2012-11-01",
+    "dateEnd": "2012-11-03",
+    "family": false,
+    "position": {
+      "lat": 39.742259,
+      "lng": -104.996098
+    }
+  },
+  {
+    "title": "Miami Beach, Florida, USA",
+    "dateStart": "2013-11-08",
+    "dateEnd": "2013-11-10",
+    "family": false,
+    "position": {
+      "lat": 25.789014,
+      "lng": -80.128665
+    }
+  },
+  {
+    "title": "Paris, France",
+    "dateStart": "2014-05-13",
+    "dateEnd": "2014-05-17",
+    "position": {
+      "lat": 48.859105,
+      "lng": 2.304872
+    }
+  },
+  {
+    "title": "Calais, France",
+    "dateStart": "2014-05-17",
+    "dateEnd": null,
+    "position": {
+      "lat": 50.96663265189947,
+      "lng": 1.8499946594238281
+    }
+  },
+  {
+    "title": "Dover, England, UK",
+    "dateStart": "2014-05-17",
+    "dateEnd": null,
+    "position": {
+      "lat": 51.12447116604973,
+      "lng": 1.3321781158447266
+    }
+  },
+  {
+    "title": "Cranbrook, England, UK",
+    "dateStart": "2014-05-17",
+    "dateEnd": "2014-05-24",
+    "position": {
+      "lat": 51.095991,
+      "lng": 0.538080
+    }
+  },
+  {
+    "title": "Leeds Castle, England, UK",
+    "dateStart": "2014-05-18",
+    "dateEnd": null,
+    "position": {
+      "lat": 51.248869,
+      "lng": 0.630159
+    }
+  },
+  {
+    "title": "Hastings, England, UK",
+    "dateStart": "2014-05-19",
+    "dateEnd": null,
+    "position": {
+      "lat": 50.854142,
+      "lng": 0.587089
+    }
+  },
+  {
+    "title": "London, England, UK",
+    "dateStart": "2014-05-21",
+    "dateEnd": "2014-05-23",
+    "position": {
+      "lat": 51.501579,
+      "lng": -0.141276
+    }
+  },
+  {
+    "title": "Würselen, Germany",
+    "dateStart": "2014-05-24",
+    "dateEnd": "2014-05-28",
+    "position": {
+      "lat": 50.821405,
+      "lng": 6.118253
+    }
+  },
+  {
+    "title": "Aachen, Germany",
+    "dateStart": "2014-05-25",
+    "dateEnd": null,
+    "position": {
+      "lat": 50.774743,
+      "lng": 6.083779
+    }
+  },
+  {
+    "title": "Kornelimünster, Germany",
+    "dateStart": "2014-05-26",
+    "dateEnd": null,
+    "position": {
+      "lat": 50.728452,
+      "lng": 6.177844
+    }
+  },
+  {
+    "title": "Monschau, Germany",
+    "dateStart": "2014-05-26",
+    "dateEnd": null,
+    "position": {
+      "lat": 50.556321,
+      "lng": 6.241842
+    }
+  },
+  {
+    "title": "Cologne, Germany",
+    "dateStart": "2014-05-28",
+    "dateEnd": null,
+    "position": {
+      "lat": 50.941383,
+      "lng": 6.956755
+    }
+  },
+  {
+    "title": "Venice, Italy",
+    "dateStart": "2014-05-28",
+    "dateEnd": "2014-05-30",
+    "position": {
+      "lat": 45.439428,
+      "lng": 12.327876
+    }
+  },
+  {
+    "title": "Florence, Italy",
+    "dateStart": "2014-05-30",
+    "dateEnd": "2014-06-01",
+    "position": {
+      "lat": 43.773615,
+      "lng": 11.257317
+    }
+  },
+  {
+    "title": "Rome, Italy",
+    "dateStart": "2014-06-01",
+    "dateEnd": "2014-06-06",
+    "position": {
+      "lat": 41.897952,
+      "lng": 12.471724
+    }
+  },
+  {
+    "title": "Vatican City",
+    "dateStart": "2014-06-03",
+    "dateEnd": null,
+    "position": {
+      "lat": 41.902171,
+      "lng": 12.456117
+    }
+  },
+  {
+    "title": "Paris, France",
+    "dateStart": "2014-06-06",
+    "dateEnd": "2014-06-08",
+    "position": {
+      "lat": 48.859103,
+      "lng": 2.327349
+    }
+  },
+  {
+    "title": "Versailles, France",
+    "dateStart": "2014-06-07",
+    "dateEnd": null,
+    "position": {
+      "lat": 48.807537,
+      "lng": 2.109651
+    }
+  },
+  {
+    "title": "Cape Town, South Africa",
+    "dateStart": "2017-03-09",
+    "dateEnd": "2017-03-18",
+    "family": false,
+    "position": {
+      "lat": -33.961451,
+      "lng": 18.409875
+    }
+  },
+  {
+    "title": "Hout Bay, South Africa",
+    "dateStart": "2017-03-15",
+    "dateEnd": null,
+    "family": false,
+    "position": {
+      "lat": -34.051330,
+      "lng": 18.362960
+    }
+  },
+  {
+    "title": "San Mateo, CA, USA",
+    "dateStart": "2017-07-30",
+    "dateEnd": "2017-08-01",
+    "position": {
+      "lat": 37.558047,
+      "lng": -122.325631
+    }
+  },
+  {
+    "title": "Half Moon Bay, CA, USA",
+    "dateStart": "2017-07-30",
+    "dateEnd": null,
+    "position": {
+      "lat": 37.432917,
+      "lng": -122.441694
+    }
+  },
+  {
+    "title": "San Francisco, CA, USA",
+    "dateStart": "2017-07-31",
+    "dateEnd": "2017-08-01",
+    "position": {
+      "lat": 37.804155,
+      "lng": -122.474835
+    }
+  },
+  {
+    "title": "Seljalandsfoss, Iceland",
+    "dateStart": "2017-08-02",
+    "dateEnd": null,
+    "position": {
+      "lat": 63.615845,
+      "lng": -19.989978
+    }
+  },
+  {
+    "title": "Skógafoss, Iceland",
+    "dateStart": "2017-08-03",
+    "dateEnd": null,
+    "position": {
+      "lat": 63.531976,
+      "lng": -19.511183
+    }
+  },
+  {
+    "title": "Svinafell, Iceland",
+    "dateStart": "2017-08-03",
+    "dateEnd": null,
+    "position": {
+      "lat": 63.980275,
+      "lng": -16.854744
+    }
+  },
+  {
+    "title": "Vík, Iceland",
+    "dateStart": "2017-08-03",
+    "dateEnd": null,
+    "position": {
+      "lat": 63.420578,
+      "lng": -19.002593
+    }
+  },
+  {
+    "title": "Jökulsárlón, Iceland",
+    "dateStart": "2017-08-04",
+    "dateEnd": null,
+    "position": {
+      "lat": 64.045385,
+      "lng": -16.182161
+    }
+  },
+  {
+    "title": "Geysir, Iceland",
+    "dateStart": "2017-08-04",
+    "dateEnd": null,
+    "position": {
+      "lat": 64.309807,
+      "lng": -20.305142
+    }
+  },
+  {
+    "title": "Gulfoss, Iceland",
+    "dateStart": "2017-08-05",
+    "dateEnd": null,
+    "position": {
+      "lat": 64.325943,
+      "lng": -20.123972
+    }
+  },
+  {
+    "title": "Reykjavik, Iceland",
+    "dateStart": "2017-08-05",
+    "dateEnd": "2017-08-18",
+    "position": {
+      "lat": 64.139539,
+      "lng": -21.959067
+    }
+  },
+  {
+    "title": "Hvalfjörður, Iceland",
+    "dateStart": "2017-08-16",
+    "dateEnd": null,
+    "position": {
+      "lat": 64.385899,
+      "lng": -21.355631
+    }
+  },
+  {
+    "title": "Akrafjall, Akranes, Iceland (Climbing)",
+    "dateStart": "2017-08-16",
+    "dateEnd": null,
+    "position": {
+      "lat": 64.322471,
+      "lng": -21.991568
+    }
+  },
+  {
+    "title": "Þingvellir, Iceland",
+    "dateStart": "2017-08-17",
+    "dateEnd": null,
+    "position": {
+      "lat": 64.257256,
+      "lng": -21.120866
+    }
+  },
+  {
+    "title": "Kastrup, Denmark",
+    "dateStart": "2017-08-18",
+    "dateEnd": "2017-08-20",
+    "position": {
+      "lat": 55.621990,
+      "lng": 12.613091
+    }
+  },
+  {
+    "title": "Copenhagen, Denmark",
+    "dateStart": "2017-08-19",
+    "dateEnd": "2017-08-20",
+    "position": {
+      "lat": 55.699110,
+      "lng": 12.595908
+    }
+  },
+  {
+    "title": "Prague, Czech Republic",
+    "dateStart": "2017-08-20",
+    "dateEnd": "2017-09-01",
+    "position": {
+      "lat": 50.087121,
+      "lng": 14.404804
+    }
+  },
+  {
+    "title": "Newcastle-upon-Tyne, England, UK",
+    "dateStart": "2017-09-01",
+    "dateEnd": null,
+    "position": {
+      "lat": 55.035607,
+      "lng": -1.709573
+    }
+  },
+  {
+    "title": "Forest-In-Teesdale, England, UK",
+    "dateStart": "2017-09-01",
+    "dateEnd": "2017-09-07",
+    "position": {
+      "lat": 54.660001,
+      "lng": -2.195123
+    }
+  },
+  {
+    "title": "Highforce, England, UK",
+    "dateStart": "2017-09-04",
+    "dateEnd": null,
+    "position": {
+      "lat": 54.650546,
+      "lng": -2.187325
+    }
+  },
+  {
+    "title": "Raby Castle, England, UK",
+    "dateStart": "2017-09-06",
+    "dateEnd": null,
+    "position": {
+      "lat": 54.590956,
+      "lng": -1.801762
+    }
+  },
+  {
+    "title": "Blairmore, Scotland, UK",
+    "dateStart": "2017-09-07",
+    "dateEnd": "2017-09-12",
+    "position": {
+      "lat": 55.990707650833244,
+      "lng": -4.895117282867432
+    }
+  },
+  {
+    "title": "Inverary Castle, Scotland, UK",
+    "dateStart": "2017-09-08",
+    "dateEnd": null,
+    "position": {
+      "lat": 56.236805700899275,
+      "lng": -5.073666572570801
+    }
+  },
+  {
+    "title": "Loch Lomond (Luss), Scotland, UK",
+    "dateStart": "2017-09-08",
+    "dateEnd": null,
+    "position": {
+      "lat": 56.10198507787032,
+      "lng": -4.636884927749634
+    }
+  },
+  {
+    "title": "Glasgow, Scotland, UK",
+    "dateStart": "2017-09-10",
+    "dateEnd": null,
+    "position": {
+      "lat": 55.868505,
+      "lng": -4.290883
+    }
+  },
+  {
+    "title": "Glen Massan, Scotland, UK",
+    "dateStart": "2017-09-11",
+    "dateEnd": null,
+    "position": {
+      "lat": 56.03611,
+      "lng": -5.02389
+    }
+  },
+  {
+    "title": "Stirling, Scotland, UK",
+    "dateStart": "2017-09-12",
+    "dateEnd": null,
+    "position": {
+      "lat": 56.123669689491436,
+      "lng": -3.947439193725586
+    }
+  },
+  {
+    "title": "Edinburgh, Scotland, UK",
+    "dateStart": "2017-09-12",
+    "dateEnd": "2017-09-14",
+    "position": {
+      "lat": 55.939837,
+      "lng": -3.225709
+    }
+  },
+  {
+    "title": "Dublin, Ireland",
+    "dateStart": "2017-09-14",
+    "dateEnd": null,
+    "position": {
+      "lat": 53.339567,
+      "lng": -6.271938
+    }
+  },
+  {
+    "title": "Spiddal, Ireland",
+    "dateStart": "2017-09-14",
+    "dateEnd": "2017-09-19",
+    "position": {
+      "lat": 53.257577,
+      "lng": -9.297197
+    }
+  },
+  {
+    "title": "Galway, Ireland",
+    "dateStart": "2017-09-15",
+    "dateEnd": null,
+    "position": {
+      "lat": 53.284527,
+      "lng": -9.056842
+    }
+  },
+  {
+    "title": "Cliffs of Moher, Ireland",
+    "dateStart": "2017-09-16",
+    "dateEnd": null,
+    "position": {
+      "lat": 52.970849,
+      "lng": -9.426201
+    }
+  },
+  {
+    "title": "Peckham, London, England, UK",
+    "dateStart": "2017-09-20",
+    "dateEnd": "2017-09-21",
+    "position": {
+      "lat": 51.473766,
+      "lng": -0.075147
+    }
+  },
+  {
+    "title": "Shoreditch, London, England, UK",
+    "dateStart": "2017-09-21",
+    "dateEnd": "2017-09-28",
+    "position": {
+      "lat": 51.525164,
+      "lng": -0.075048
+    }
+  },
+  {
+    "title": "Vilano Beach, Florida, USA",
+    "dateStart": "2017-09-28",
+    "dateEnd": "2017-10-06",
+    "position": {
+      "lat": 29.924214,
+      "lng": -81.298828
+    }
+  },
+  {
+    "title": "St. Augustine, Florida, USA",
+    "dateStart": "2017-09-30",
+    "dateEnd": "2017-10-05",
+    "position": {
+      "lat": 29.895766,
+      "lng": -81.312946
+    }
+  },
+  {
+    "title": "Palm Coast, Florida, USA",
+    "dateStart": "2017-10-01",
+    "dateEnd": null,
+    "position": {
+      "lat": 29.558014,
+      "lng": -81.172929
+    }
+  },
+  {
+    "title": "Crescent Beach, Florida, USA",
+    "dateStart": "2017-10-02",
+    "dateEnd": null,
+    "position": {
+      "lat": 29.768487,
+      "lng": -81.253364
+    }
+  },
+  {
+    "title": "Orlando (Davenport), Florida, USA",
+    "dateStart": "2017-10-06",
+    "dateEnd": "2017-10-10",
+    "position": {
+      "lat": 28.259830,
+      "lng": -81.649953
+    }
+  },
+  {
+    "title": "Pure Mareazul, Playa del Carmen, México",
+    "dateStart": "2017-10-10",
+    "dateEnd": "2017-10-13",
+    "position": {
+      "lat": 20.651246,
+      "lng": -87.046551
+    }
+  },
+  {
+    "title": "Vidanta Mayan Palace, Playa del Carmen, México",
+    "dateStart": "2017-10-13",
+    "dateEnd": "2017-10-20",
+    "position": {
+      "lat": 20.767236,
+      "lng": -86.954925
+    }
+  },
+  {
+    "title": "Playacar, Playa del Carmen, México",
+    "dateStart": "2017-10-21",
+    "dateEnd": "2017-10-26",
+    "position": {
+      "lat": 20.611891,
+      "lng": -87.083802
+    }
+  },
+  {
+    "title": "Cobá, México",
+    "dateStart": "2017-10-23",
+    "dateEnd": null,
+    "position": {
+      "lat": 20.494591,
+      "lng": -87.720371
+    }
+  },
+  {
+    "title": "Tulum, México",
+    "dateStart": "2017-10-23",
+    "dateEnd": null,
+    "position": {
+      "lat": 20.214708,
+      "lng": -87.430811
+    }
+  },
+  {
+    "title": "Austin, Texas, USA",
+    "dateStart": "2017-11-14",
+    "dateEnd": "2017-11-18",
+    "family": false,
+    "position": {
+      "lat": 30.265235,
+      "lng": -97.738677
+    }
+  }
+]

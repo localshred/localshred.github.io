@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    <link href="//fonts.googleapis.com/css?family=Exo+2:200italic,400" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/css/foundation.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/pygments.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <script type="application/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.25.0/ramda.min.js"></script>
+    <script type="application/javascript" src="/js/travel.js"></script>
+  </head>
+
+  <body>
+    <div id="main">
+      <header>
+        <nav>
+          <ul>
+            <li><a href="/" title="posts"><i class="fa fa-book"></i></a></li>
+            <li><a href="/travel.html" title="travel"><i class="fa fa-globe"></i></a></li>
+            <li><a href="/elm-games" title="games"><i class="fa fa-gamepad"></i></a></li>
+            <li><a href="https://github.com/localshred" target="_blank" title="localshred on github"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://twitter.com/localshred" target="_blank" title="@localshred on twitter"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://instagram.com/localshred" target="_blank" title="@localshred on instagram"><i class="fa fa-instagram"></i></a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <content>
+        <div id="map"></div>
+        {{ content }}
+      </content>
+
+      <footer>
+      </footer>
+    </div>
+
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4G4S9xDBG2EuEo2MgVCvgAwlFTvYHls4&callback=LocalshredTravelMap.render"
+    >
+    </script>
+  </body>
+</html>
+
