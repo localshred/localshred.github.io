@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/css/pygments.css" type="text/css">
     <link rel="stylesheet" href="/css/main.css" type="text/css">
+    {% for stylesheet in page.stylesheets %}
+    <link rel="stylesheet" href="{{ stylesheet }}" type="text/css">
+    {% endfor %}
+    {% for script in page.scripts.header %}
+    <script type="application/javascript" src="{{ script }}"></script>
+    {% endfor %}
   </head>
 
   <body>
@@ -16,20 +22,26 @@
       <header>
         <nav>
           <ul>
-            <li><i class="fa fa-book"></i> <a href="/">posts</a></li>
-            <li><i class="fa fa-globe"></i> <a href="/travel.html">travel</a></li>
-            <li><i class="fa fa-gamepad"></i> <a href="/elm-games">games</a></li>
-            <li><i class="fa fa-github"></i> <a href="https://github.com/localshred" target="_blank">localshred</a></li>
-            <li><i class="fa fa-twitter"></i> <a href="https://twitter.com/localshred" target="_blank">@localshred</a></li>
-            <li><i class="fa fa-instagram"></i> <a href="https://instagram.com/localshred" target="_blank">@localshred</a></li>
+            <li><a href="/" title="posts"><i class="fa fa-book"></i></a></li>
+            <li><a href="/travel.html" title="travel"><i class="fa fa-globe"></i></a></li>
+            <li><a href="/elm-games" title="games"><i class="fa fa-gamepad"></i></a></li>
+            <li><a href="https://github.com/localshred" target="_blank" title="localshred on github"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://twitter.com/localshred" target="_blank" title="@localshred on twitter"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://instagram.com/localshred" target="_blank" title="@localshred on instagram"><i class="fa fa-instagram"></i></a></li>
           </ul>
         </nav>
       </header>
 
-      {{ content }}
+      <content>
+        {{ content }}
+      </content>
 
       <footer>
       </footer>
+
+      {% for script in page.scripts.body %}
+      <script async defer src="{{ script }}"></script>
+      {% endfor %}
     </div>
   </body>
 </html>
