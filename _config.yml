@@ -23,7 +23,7 @@ maps:
     api_key: AIzaSyD4G4S9xDBG2EuEo2MgVCvgAwlFTvYHls4
     maker_cluster:
       enabled: true
-markdown: redcarpet
+markdown: kramdown
 permalink: none
 paginator: true
 paginate: 5
